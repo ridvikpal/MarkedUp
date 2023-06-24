@@ -1,14 +1,20 @@
+'''
+This file contains all functions that interact with the TwelveData API
+for getting the stock data
+'''
+
 ''' IMPORT MODULES '''
 from twelvedata import TDClient
 import pandas as pd
-import mplfinance as mpf
 from datetime import datetime
 import json
 
-''' CREATE TDCLIENT OBJECT '''
+''' CREATE GLOBAL TDCLIENT OBJECT '''
+# allows data from TwelveData API
 td = TDClient(apikey="2d748ba087024b199c77cce35b2f8d78")
 
-# this function updates the stock json list and stores it in the application
+''' FUNCTION DEFINITIONS '''
+# this function updates the stock json list and then returns the data as a dataframe
 """ The information is stored as:
     "symbol",
     "name",
@@ -18,23 +24,22 @@ td = TDClient(apikey="2d748ba087024b199c77cce35b2f8d78")
     "country",
     "type"
 """
-def update_stocks_list() -> None:
+def update_stocks_list() -> pd.DataFrame:
     # with open("all_stocks.json", "w") as f:
         # all_stocks = td.get_stocks_list().as_json()
         # json.dump(all_stocks, indent=4, fp=f)
     df = pd.read_json("all_stocks.json")
     return df
 
-# gets historical stock information and returns it as a dataframe
-def getStockTimeSeries(symb: str, tmzone: str, fiveYear: bool = False) -> pd.DataFrame:
+# gets historical stock information and returns it as a plotly figure (ready to graph)
+def getStockTimeSeriesGraph(symb: str, fiveYear: bool = False) -> plotly.graph_objects.Figure:
     if fiveYear: # get data for 5 years
         time_series = td.time_series(
             symbol=symb,
             interval="1day",
             outputsize=2000,
             end_date=datetime.today(),
-            start_date=datetime(2000, 1, 1),
-            timezone=tmzone,
+            start_date=datetime(2000, 1, 1)
         )
     else: # get data for a month
         time_series = td.time_series(
@@ -42,54 +47,24 @@ def getStockTimeSeries(symb: str, tmzone: str, fiveYear: bool = False) -> pd.Dat
             interval="1day",
             outputsize=30,
             end_date=datetime.today(),
-            start_date=datetime(2000, 1, 1),
-            timezone=tmzone,
+            start_date=datetime(2000, 1, 1)
         )
-    return time_series.as_pandas
+    return time_series.as_plotly_figure()
 
 # lookup from the dataframe for a specific stock from partial name
-def getStockInformation(partialName: str, country: str, df: pd.DataFrame) -> pd.Series:
+def getStockInformation(partialName: str, country: str, df: pd.DataFrame) -> pd.DataFrame:
     row = df[(df['name'].str.contains(pat=partialName, case=False)) & (df['country'] == country)]
     return row
 
-def main() -> None:
-    allStocksDF = update_stocks_list()
-    # test = getStockInformation("apple", "United States", allStocksDF)
-    # print(test)
-    # search through the dataframe for a specific stock
+# get a trading style quote for a specific stock
+def getStockQuote(symb: str) -> pd.DataFrame:
+    stockQuote = td.quote(
+        symbol=symb,
+        interval="5min"
+    )
+    return stockQuote.as_pandas()
 
-
-
-if __name__ == "__main__":
-    main()
-
-# time_series = td.time_series(
-#     symbol="AAPL",
-#     interval="1day",
-#     outputsize=2000,
-#     end_date=datetime.today(),
-#     start_date=datetime(2000, 1, 1),
-#     timezone="America/New_York",
-# )
-
-# appleData = time_series.as_pandas()
-
-# # result.to_csv("test.csv", encoding="utf-8")
-
-# appleData = appleData.reindex(index=appleData.index[::-1])
-
-# print(appleData)
-# time_series.as_pyplot_figure().show()
-
-# appleData = pd.read_csv("test.csv", encoding="utf-8", index_col=0)
-
-
-# appleData.index = pd.to_datetime(appleData.index)
-
-
-# print(appleData.dtypes)
-# print(appleData)
-
-# print(appleData.index.month)
-
-# mpf.plot(appleData, type="candle")
+# gets the live price for a specific stock
+def getLivePrice(symb: str) -> float:
+    price = td.price(symbol=symb).as_json()
+    return price['price']
