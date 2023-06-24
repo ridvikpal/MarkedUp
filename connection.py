@@ -1,9 +1,11 @@
+''' IMPORT MODULES '''
 from twelvedata import TDClient
 import pandas as pd
 import mplfinance as mpf
 from datetime import datetime
 import json
 
+''' CREATE TDCLIENT OBJECT '''
 td = TDClient(apikey="2d748ba087024b199c77cce35b2f8d78")
 
 # this function updates the stock json list and stores it in the application
@@ -17,20 +19,46 @@ td = TDClient(apikey="2d748ba087024b199c77cce35b2f8d78")
     "type"
 """
 def update_stocks_list() -> None:
-    with open("all_stocks.json", "w") as f:
-        all_stocks = td.get_stocks_list().as_json()
-        json.dump(all_stocks, indent=4, fp=f)
-    return all_stocks
+    # with open("all_stocks.json", "w") as f:
+        # all_stocks = td.get_stocks_list().as_json()
+        # json.dump(all_stocks, indent=4, fp=f)
+    df = pd.read_json("all_stocks.json")
+    return df
 
-# gets stock information and returns it as a dataframe
-def getStockTimeSeries() -> pd.DataFrame:
-    pass
+# gets historical stock information and returns it as a dataframe
+def getStockTimeSeries(symb: str, tmzone: str, fiveYear: bool = False) -> pd.DataFrame:
+    if fiveYear: # get data for 5 years
+        time_series = td.time_series(
+            symbol=symb,
+            interval="1day",
+            outputsize=2000,
+            end_date=datetime.today(),
+            start_date=datetime(2000, 1, 1),
+            timezone=tmzone,
+        )
+    else: # get data for a month
+        time_series = td.time_series(
+            symbol=symb,
+            interval="1day",
+            outputsize=30,
+            end_date=datetime.today(),
+            start_date=datetime(2000, 1, 1),
+            timezone=tmzone,
+        )
+    return time_series.as_pandas
+
+# lookup from the dataframe for a specific stock from partial name
+def getStockInformation(partialName: str, country: str, df: pd.DataFrame) -> pd.Series:
+    row = df[(df['name'].str.contains(pat=partialName, case=False)) & (df['country'] == country)]
+    return row
 
 def main() -> None:
-    all_stocks = update_stocks_list()
-    for x in all_stocks:
-        # print(x['symbol'])
-        print(x['symbol'])
+    allStocksDF = update_stocks_list()
+    # test = getStockInformation("apple", "United States", allStocksDF)
+    # print(test)
+    # search through the dataframe for a specific stock
+
+
 
 if __name__ == "__main__":
     main()
