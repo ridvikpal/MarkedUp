@@ -28,7 +28,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.plotlyGraph = QWidget(self.layoutWidget)
+
+        # self.plotlyGraph = QWidget(self.layoutWidget)
+        self.plotlyGraph = QWebEngineView(self.layoutWidget)
+        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
+        self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+
+
         self.plotlyGraph.setObjectName(u"plotlyGraph")
 
         self.horizontalLayout.addWidget(self.plotlyGraph)
@@ -150,12 +156,12 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        # extension for plotly web widget
-        self.web = QWebEngineView()
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
-        self.web.load(QUrl.fromLocalFile(file_path))
-        self.web.show()
-        ##
+        # # extension for plotly web widget
+        # self.web = QWebEngineView()
+        # file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
+        # self.web.load(QUrl.fromLocalFile(file_path))
+        # self.web.show()
+        # ##
 
         self.retranslateUi(MainWindow)
 
