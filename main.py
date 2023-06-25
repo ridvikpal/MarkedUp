@@ -4,12 +4,14 @@ import connection
 
 ''' DEFINE MAIN FUNCTION '''
 def main() -> None:
-    allStocksDF = update_stocks_list()
+    allStocksDF = connection.update_stocks_list()
     # test = getStockInformation("apple", "United States", allStocksDF)
     # print(test)
 
-    anotherTest = getLivePrice("AAPL")
-    print(anotherTest)
+    # anotherTest = connection.getLivePrice("AAPL")
+    anotherTest = connection.getStockQuote("AAPL")
+    anotherTest.to_csv('test.csv', index=False)
+    # print(anotherTest)
     # appleFigure = getStockTimeSeriesGraph("AAPL")
     # gui.show_in_window(appleFigure, "AAPL")
     # test = getStockInformation("apple", "United States", allStocksDF)

@@ -8,6 +8,7 @@ from twelvedata import TDClient
 import pandas as pd
 from datetime import datetime
 import json
+import plotly.graph_objects as gpo
 
 ''' CREATE GLOBAL TDCLIENT OBJECT '''
 # allows data from TwelveData API
@@ -32,7 +33,7 @@ def update_stocks_list() -> pd.DataFrame:
     return df
 
 # gets historical stock information and returns it as a plotly figure (ready to graph)
-def getStockTimeSeriesGraph(symb: str, fiveYear: bool = False) -> plotly.graph_objects.Figure:
+def getStockTimeSeriesGraph(symb: str, fiveYear: bool = False) -> gpo.Figure:
     if fiveYear: # get data for 5 years
         time_series = td.time_series(
             symbol=symb,
