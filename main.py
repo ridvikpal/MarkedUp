@@ -1,5 +1,5 @@
 ''' IMPORT MODULES '''
-import gui
+import ui_user_interface_design
 import connection
 
 ''' DEFINE MAIN FUNCTION '''
@@ -16,7 +16,7 @@ def main() -> None:
     # gui.show_in_window(appleFigure, "AAPL")
     # test = getStockInformation("apple", "United States", allStocksDF)
     # print(test)
-    gui.createMainWindow()
+    ui_user_interface_design.createMainWindow()
 
 
 

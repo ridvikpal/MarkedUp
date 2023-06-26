@@ -13,6 +13,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 import os
+import sys
 
 
 class Ui_MainWindow(object):
@@ -167,3 +168,11 @@ class Ui_MainWindow(object):
         self.stockTimeStamp.setText("")
         self.plotlyGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"CandleStick Chart", None))
     # retranslateUi
+
+def createMainWindow() -> None:
+    app = QApplication(sys.argv)
+    window = QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(window)
+    window.show()
+    sys.exit(app.exec_())
