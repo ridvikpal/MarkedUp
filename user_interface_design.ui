@@ -78,7 +78,7 @@
     <property name="title">
      <string>Stock Data</string>
     </property>
-    <widget class="QTableWidget" name="currentPriceTable">
+    <widget class="QTableWidget" name="stockDataTable">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -180,7 +180,7 @@
       </property>
      </column>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
