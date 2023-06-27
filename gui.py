@@ -16,7 +16,7 @@ import os
 import sys
 import connection
 from datetime import datetime
-from PIL import Image
+import plotly.offline
 import requests
 
 
@@ -37,8 +37,6 @@ class Ui_MainWindow(object):
 
         ### Setup plotly graph
         self.plotlyGraph = QWebEngineView(self.plotlyGroup)
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
-        self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
         self.plotlyGraph.setObjectName(u"plotlyGraph")
         self.plotlyGraph.setGeometry(QRect(10, 20, 1051, 781))
 
@@ -227,6 +225,10 @@ class Ui_MainWindow(object):
         self.stockImage.setPixmap(QPixmap(image))
 
         # update the stock plotly graph
+        stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
+        plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
+        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
+        self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
 
 
 
