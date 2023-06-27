@@ -6,252 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1411</width>
-    <height>794</height>
+    <width>1426</width>
+    <height>830</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MarkedUp</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGroupBox" name="currentPriceGroup">
-    <property name="geometry">
-     <rect>
-      <x>1100</x>
-      <y>270</y>
-      <width>301</width>
-      <height>221</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Current Prices</string>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <widget class="QTableWidget" name="currentPriceTable">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>281</width>
-       <height>191</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-      </font>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="fiftyTwoWeekAverageGroup">
-    <property name="geometry">
-     <rect>
-      <x>1100</x>
-      <y>500</y>
-      <width>301</width>
-      <height>251</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>52-Week Average</string>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <widget class="QTableWidget" name="fiftyTwoWeekAverageTable">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>281</width>
-       <height>221</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-      </font>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QLineEdit" name="stockSearch">
-    <property name="geometry">
-     <rect>
-      <x>1100</x>
-      <y>19</y>
-      <width>301</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>1100</x>
-      <y>60</y>
-      <width>301</width>
-      <height>52</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0">
-     <item>
-      <widget class="QLabel" name="stockSymbol">
-       <property name="font">
-        <font>
-         <family>Arial</family>
-         <pointsize>32</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="stockName">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignBottom|Qt::AlignHCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>1100</x>
-      <y>120</y>
-      <width>301</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="stockImage">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLabel" name="stockExchange">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="stockMicCode">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="stockCurrency">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="stockTimeStamp">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="plotlyGroupBox">
+   <widget class="QGroupBox" name="plotlyGroup">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1081</width>
-      <height>741</height>
+      <width>1071</width>
+      <height>811</height>
      </rect>
     </property>
     <property name="title">
@@ -262,24 +31,253 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>1061</width>
-       <height>711</height>
+       <width>1051</width>
+       <height>781</height>
       </rect>
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="stockSearchGroup">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>10</y>
+      <width>321</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Stock Search</string>
+    </property>
+    <widget class="QLineEdit" name="stockSearch">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>301</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="stockDataGroup">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>80</y>
+      <width>321</width>
+      <height>511</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Stock Data</string>
+    </property>
+    <widget class="QTableWidget" name="currentPriceTable">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>301</width>
+       <height>351</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+      </font>
+     </property>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>200</number>
+     </attribute>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>23</number>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>23</number>
+     </attribute>
+     <row>
+      <property name="text">
+       <string>Symbol</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Exchange</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>MIC</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Currency</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>TimeStamp</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Open</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>High</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Low</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Close</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Volume</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Previous Close</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Change</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Percent Change</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Average Volume</string>
+      </property>
+     </row>
+     <column>
+      <property name="text">
+       <string>Data</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>301</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="stockImage">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="stockName">
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="favouritesGroup">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>610</y>
+      <width>321</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Favourites</string>
+    </property>
+    <widget class="QTableWidget" name="favouritesTable">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>301</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Symbol</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Name</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1411</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

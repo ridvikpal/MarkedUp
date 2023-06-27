@@ -1,13 +1,13 @@
 ''' IMPORT MODULES '''
-import ui_user_interface_design
+import gui
 import connection
 
 ''' DEFINE MAIN FUNCTION '''
 def main() -> None:
-    ui_user_interface_design.createMainWindow()
+    gui.createMainWindow()
     # test = connection.getStockQuote("AAPL")
-    # name = test['name'][0]
-    # print(name)
+    # fiftyTwoWeek = test['fifty_two_week'][0]
+    # print(fiftyTwoWeek)
 
 
 
