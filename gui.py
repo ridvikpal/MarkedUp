@@ -195,9 +195,11 @@ class Ui_MainWindow(object):
 
     ### function to use when entering stock
     def enterStock(self) -> None:
-        # get quote for specific stock
+        # get data for specific stock
         stockSymbol = self.stockSearch.text()
         quote = connection.getStockQuote(stockSymbol)
+        imageURL = connection.getStockLogo(stockSymbol)
+        stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
 
         # update the data table
         self.stockDataTable.setItem(0, 0, QTableWidgetItem(str(quote['symbol'][0])))
@@ -219,13 +221,11 @@ class Ui_MainWindow(object):
         self.stockName.setText(str(quote['name'][0]))
 
         # update the stock logo
-        imageURL = connection.getStockLogo(stockSymbol)
         image = QImage()
         image.loadFromData(requests.get(imageURL).content)
         self.stockImage.setPixmap(QPixmap(image))
 
         # update the stock plotly graph
-        stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
         plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
         file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
         self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
@@ -245,4 +245,5 @@ def testFunction():
     # quote.drop(columns=['fifty_two_week', 'is_market_open'], axis=1, inplace=True)
     # test = connection.getStockLogo("AAPL")
     # im = Image.open(requests.get(test, stream=True).raw)
-    print(test)
+    # print(test)
+    pass
