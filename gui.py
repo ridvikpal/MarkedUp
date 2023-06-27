@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1426, 830)
+        MainWindow.setFixedSize(1426, 830)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.plotlyGroup = QGroupBox(self.centralwidget)
@@ -243,6 +243,6 @@ def createMainWindow() -> None:
 def testFunction():
     # quote = connection.getStockQuote("AAPL")
     # quote.drop(columns=['fifty_two_week', 'is_market_open'], axis=1, inplace=True)
-    test = connection.getStockLogo("AAPL")
+    # test = connection.getStockLogo("AAPL")
     # im = Image.open(requests.get(test, stream=True).raw)
     print(test)
