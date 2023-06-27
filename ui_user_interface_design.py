@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'user_interface_designcJnntN.ui'
+## Form generated from reading UI file 'user_interface_designkFSJSx.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -15,7 +15,6 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView
 import os
 import sys
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -27,12 +26,14 @@ class Ui_MainWindow(object):
         self.currentPriceGroup.setObjectName(u"currentPriceGroup")
         self.currentPriceGroup.setGeometry(QRect(1100, 270, 301, 221))
         self.currentPriceGroup.setCheckable(False)
+
         self.currentPriceTable = QTableWidget(self.currentPriceGroup)
         self.currentPriceTable.setObjectName(u"currentPriceTable")
         self.currentPriceTable.setGeometry(QRect(10, 20, 281, 191))
         font = QFont()
         font.setFamily(u"Arial")
         self.currentPriceTable.setFont(font)
+
         self.fiftyTwoWeekAverageGroup = QGroupBox(self.centralwidget)
         self.fiftyTwoWeekAverageGroup.setObjectName(u"fiftyTwoWeekAverageGroup")
         self.fiftyTwoWeekAverageGroup.setGeometry(QRect(1100, 500, 301, 251))
@@ -41,19 +42,25 @@ class Ui_MainWindow(object):
         self.fiftyTwoWeekAverageTable.setObjectName(u"fiftyTwoWeekAverageTable")
         self.fiftyTwoWeekAverageTable.setGeometry(QRect(10, 20, 281, 221))
         self.fiftyTwoWeekAverageTable.setFont(font)
-        self.lineEdit = QLineEdit(self.centralwidget)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(1100, 19, 301, 31))
+
+        self.stockSearch = QLineEdit(self.centralwidget)
+        self.stockSearch.setObjectName(u"stockSearch")
+        self.stockSearch.setGeometry(QRect(1100, 19, 301, 31))
         font1 = QFont()
         font1.setFamily(u"Arial")
         font1.setPointSize(14)
-        self.lineEdit.setFont(font1)
+        self.stockSearch.setFont(font1)
+
+        # hit enter on stock search line edit widget
+        self.stockSearch.editingFinished.connect(self.enterStock)
+
         self.layoutWidget = QWidget(self.centralwidget)
         self.layoutWidget.setObjectName(u"layoutWidget")
         self.layoutWidget.setGeometry(QRect(1100, 60, 301, 52))
         self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+
         self.stockSymbol = QLabel(self.layoutWidget)
         self.stockSymbol.setObjectName(u"stockSymbol")
         font2 = QFont()
@@ -80,6 +87,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QHBoxLayout(self.layoutWidget1)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+
         self.stockImage = QLabel(self.layoutWidget1)
         self.stockImage.setObjectName(u"stockImage")
 
@@ -87,6 +95,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
+
         self.stockExchange = QLabel(self.layoutWidget1)
         self.stockExchange.setObjectName(u"stockExchange")
         self.stockExchange.setFont(font3)
@@ -123,7 +132,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.stockTimeStamp)
 
-
         self.horizontalLayout.addLayout(self.verticalLayout)
 
         self.plotlyGroupBox = QGroupBox(self.centralwidget)
@@ -134,7 +142,6 @@ class Ui_MainWindow(object):
         # self.plotlyGraph.setObjectName(u"plotlyGraph")
         # self.plotlyGraph.setGeometry(QRect(10, 20, 1061, 711))
 
-        # setup the plotly graph
         self.plotlyGraph = QWebEngineView(self.plotlyGroupBox)
         file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
         self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
@@ -168,6 +175,10 @@ class Ui_MainWindow(object):
         self.stockTimeStamp.setText("")
         self.plotlyGroupBox.setTitle(QCoreApplication.translate("MainWindow", u"CandleStick Chart", None))
     # retranslateUi
+
+    def enterStock(self):
+        stockSymbol = self.stockSearch.text()
+        self.stockSymbol.setText(stockSymbol)
 
 def createMainWindow() -> None:
     app = QApplication(sys.argv)

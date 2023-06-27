@@ -76,7 +76,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="stockSearch">
     <property name="geometry">
      <rect>
       <x>1100</x>
