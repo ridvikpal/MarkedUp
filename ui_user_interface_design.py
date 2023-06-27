@@ -14,6 +14,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 import os
 import sys
+import connection
+import pandas
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -51,7 +53,7 @@ class Ui_MainWindow(object):
         font1.setPointSize(14)
         self.stockSearch.setFont(font1)
 
-        # hit enter on stock search line edit widget
+        ### Add connection to stock search line edit
         self.stockSearch.editingFinished.connect(self.enterStock)
 
         self.layoutWidget = QWidget(self.centralwidget)
@@ -142,6 +144,7 @@ class Ui_MainWindow(object):
         # self.plotlyGraph.setObjectName(u"plotlyGraph")
         # self.plotlyGraph.setGeometry(QRect(10, 20, 1061, 711))
 
+        ### Setup Plotly Graph
         self.plotlyGraph = QWebEngineView(self.plotlyGroupBox)
         file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
         self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
@@ -177,8 +180,26 @@ class Ui_MainWindow(object):
     # retranslateUi
 
     def enterStock(self):
+        # get quote for specific stock
         stockSymbol = self.stockSearch.text()
+        quote = connection.getStockQuote(stockSymbol)
+
+        # update stock symbol
         self.stockSymbol.setText(stockSymbol)
+        self.stockSymbol.adjustSize()
+        # update the stock name
+        self.stockName.setText(str(quote['name'][0]))
+        # update the stock
+        self.stockExchange.setText(str(quote['exchange'][0]))
+        # update the stock mic code
+        self.stockMicCode.setText(str(quote['mic_code'][0]))
+        # update the currency
+        self.stockCurrency.setText(str(quote['currency'][0]))
+        # update the timestamp
+        self.stockTimeStamp.setText(str(quote['timestamp'][0]))
+
+        # update the table
+
 
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
