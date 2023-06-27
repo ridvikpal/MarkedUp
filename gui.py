@@ -16,7 +16,8 @@ import os
 import sys
 import connection
 from datetime import datetime
-import pandas
+from PIL import Image
+import requests
 
 
 class Ui_MainWindow(object):
@@ -219,6 +220,15 @@ class Ui_MainWindow(object):
         # update the stock name
         self.stockName.setText(str(quote['name'][0]))
 
+        # update the stock logo
+        imageURL = connection.getStockLogo(stockSymbol)
+        image = QImage()
+        image.loadFromData(requests.get(imageURL).content)
+        self.stockImage.setPixmap(QPixmap(image))
+
+        # update the stock plotly graph
+
+
 
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
@@ -229,5 +239,8 @@ def createMainWindow() -> None:
     sys.exit(app.exec_())
 
 def testFunction():
-    quote = connection.getStockQuote("AAPL")
-    quote.drop(columns=['fifty_two_week', 'is_market_open'], axis=1, inplace=True)
+    # quote = connection.getStockQuote("AAPL")
+    # quote.drop(columns=['fifty_two_week', 'is_market_open'], axis=1, inplace=True)
+    test = connection.getStockLogo("AAPL")
+    # im = Image.open(requests.get(test, stream=True).raw)
+    print(test)
