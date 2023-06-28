@@ -33,12 +33,12 @@ def update_stocks_list() -> pd.DataFrame:
     return df
 
 # gets historical stock information and returns it as a plotly figure (ready to graph)
-def getStockTimeSeriesGraph(symb: str, fiveYear: bool = False) -> gpo.Figure:
-    if fiveYear: # get data for 5 years
+def getStockTimeSeriesGraph(symb: str, oneYear: bool = True) -> gpo.Figure:
+    if oneYear: # get data for 5 years
         time_series = td.time_series(
             symbol=symb,
             interval="1day",
-            outputsize=2000,
+            outputsize=365,
             end_date=datetime.today(),
             start_date=datetime(2000, 1, 1)
         )
