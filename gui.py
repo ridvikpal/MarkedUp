@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'user_interface_designUseVZJ.ui'
+## Form generated from reading UI file 'user_interface_designcHKCfT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -33,56 +33,12 @@ class Ui_MainWindow(object):
 
         # self.plotlyGraph = QWidget(self.plotlyGroup)
         # self.plotlyGraph.setObjectName(u"plotlyGraph")
-        # self.plotlyGraph.setGeometry(QRect(10, 60, 1051, 741))
+        # self.plotlyGraph.setGeometry(QRect(10, 20, 1051, 781))
 
         ### Setup plotly graph
         self.plotlyGraph = QWebEngineView(self.plotlyGroup)
         self.plotlyGraph.setObjectName(u"plotlyGraph")
-        self.plotlyGraph.setGeometry(QRect(10, 60, 1051, 741))
-
-        self.layoutWidget = QWidget(self.plotlyGroup)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(11, 20, 1051, 25))
-        self.horizontalLayout_3 = QHBoxLayout(self.layoutWidget)
-        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.weekButton = QPushButton(self.layoutWidget)
-        self.weekButton.setObjectName(u"weekButton")
-        font = QFont()
-        font.setFamily(u"Arial")
-        self.weekButton.setFont(font)
-
-        self.horizontalLayout_3.addWidget(self.weekButton)
-
-        self.monthButton = QPushButton(self.layoutWidget)
-        self.monthButton.setObjectName(u"monthButton")
-        self.monthButton.setFont(font)
-
-        self.horizontalLayout_3.addWidget(self.monthButton)
-
-        self.threeMonthsButton = QPushButton(self.layoutWidget)
-        self.threeMonthsButton.setObjectName(u"threeMonthsButton")
-        self.threeMonthsButton.setFont(font)
-
-        self.horizontalLayout_3.addWidget(self.threeMonthsButton)
-
-        self.sixMonthsButton = QPushButton(self.layoutWidget)
-        self.sixMonthsButton.setObjectName(u"sixMonthsButton")
-        self.sixMonthsButton.setFont(font)
-
-        self.horizontalLayout_3.addWidget(self.sixMonthsButton)
-
-        self.yearButton = QPushButton(self.layoutWidget)
-        self.yearButton.setObjectName(u"yearButton")
-        self.yearButton.setFont(font)
-
-        self.horizontalLayout_3.addWidget(self.yearButton)
-
-        self.fiveYearsButton = QPushButton(self.layoutWidget)
-        self.fiveYearsButton.setObjectName(u"fiveYearsButton")
-        self.fiveYearsButton.setFont(font)
-
-        self.horizontalLayout_3.addWidget(self.fiveYearsButton)
+        self.plotlyGraph.setGeometry(QRect(10, 20, 1051, 781))
 
         self.stockSearchGroup = QGroupBox(self.centralwidget)
         self.stockSearchGroup.setObjectName(u"stockSearchGroup")
@@ -90,10 +46,10 @@ class Ui_MainWindow(object):
         self.stockSearch = QLineEdit(self.stockSearchGroup)
         self.stockSearch.setObjectName(u"stockSearch")
         self.stockSearch.setGeometry(QRect(10, 20, 171, 31))
-        font1 = QFont()
-        font1.setFamily(u"Arial")
-        font1.setPointSize(14)
-        self.stockSearch.setFont(font1)
+        font = QFont()
+        font.setFamily(u"Arial")
+        font.setPointSize(14)
+        self.stockSearch.setFont(font)
 
         ### Run function on enter for stock search line edit
         self.stockSearch.editingFinished.connect(self.enterStock)
@@ -166,18 +122,20 @@ class Ui_MainWindow(object):
         self.stockDataTable.setVerticalHeaderItem(14, __qtablewidgetitem15)
         self.stockDataTable.setObjectName(u"stockDataTable")
         self.stockDataTable.setGeometry(QRect(10, 150, 301, 371))
-        self.stockDataTable.setFont(font)
+        font1 = QFont()
+        font1.setFamily(u"Arial")
+        self.stockDataTable.setFont(font1)
         self.stockDataTable.horizontalHeader().setCascadingSectionResizes(False)
         self.stockDataTable.horizontalHeader().setDefaultSectionSize(200)
         self.stockDataTable.verticalHeader().setMinimumSectionSize(23)
         self.stockDataTable.verticalHeader().setDefaultSectionSize(23)
-        self.layoutWidget1 = QWidget(self.stockDataGroup)
-        self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(10, 20, 301, 121))
-        self.horizontalLayout = QHBoxLayout(self.layoutWidget1)
+        self.layoutWidget = QWidget(self.stockDataGroup)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 20, 301, 121))
+        self.horizontalLayout = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.stockImage = QLabel(self.layoutWidget1)
+        self.stockImage = QLabel(self.layoutWidget)
         self.stockImage.setObjectName(u"stockImage")
         font2 = QFont()
         font2.setPointSize(14)
@@ -189,7 +147,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.stockImage)
 
-        self.stockName = QLabel(self.layoutWidget1)
+        self.stockName = QLabel(self.layoutWidget)
         self.stockName.setObjectName(u"stockName")
         self.stockName.setFont(font2)
         self.stockName.setFrameShape(QFrame.NoFrame)
@@ -212,21 +170,21 @@ class Ui_MainWindow(object):
         self.favouritesTable.setObjectName(u"favouritesTable")
         self.favouritesTable.setGeometry(QRect(10, 20, 301, 141))
         self.favouritesTable.horizontalHeader().setStretchLastSection(True)
-        self.layoutWidget2 = QWidget(self.favouritesGroup)
-        self.layoutWidget2.setObjectName(u"layoutWidget2")
-        self.layoutWidget2.setGeometry(QRect(10, 170, 301, 25))
-        self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget2)
+        self.layoutWidget1 = QWidget(self.favouritesGroup)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.layoutWidget1.setGeometry(QRect(10, 170, 301, 25))
+        self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget1)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.addFavouritesButton = QPushButton(self.layoutWidget2)
+        self.addFavouritesButton = QPushButton(self.layoutWidget1)
         self.addFavouritesButton.setObjectName(u"addFavouritesButton")
-        self.addFavouritesButton.setFont(font)
+        self.addFavouritesButton.setFont(font1)
 
         self.horizontalLayout_2.addWidget(self.addFavouritesButton)
 
-        self.removeFavouritesButton = QPushButton(self.layoutWidget2)
+        self.removeFavouritesButton = QPushButton(self.layoutWidget1)
         self.removeFavouritesButton.setObjectName(u"removeFavouritesButton")
-        self.removeFavouritesButton.setFont(font)
+        self.removeFavouritesButton.setFont(font1)
 
         self.horizontalLayout_2.addWidget(self.removeFavouritesButton)
 
@@ -240,12 +198,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MarkedUp", None))
         self.plotlyGroup.setTitle(QCoreApplication.translate("MainWindow", u"CandleStick Chart", None))
-        self.weekButton.setText(QCoreApplication.translate("MainWindow", u"1 Week", None))
-        self.monthButton.setText(QCoreApplication.translate("MainWindow", u"1 Month", None))
-        self.threeMonthsButton.setText(QCoreApplication.translate("MainWindow", u"3 Months", None))
-        self.sixMonthsButton.setText(QCoreApplication.translate("MainWindow", u"6 Months", None))
-        self.yearButton.setText(QCoreApplication.translate("MainWindow", u"1 Year", None))
-        self.fiveYearsButton.setText(QCoreApplication.translate("MainWindow", u"5 Years", None))
         self.stockSearchGroup.setTitle(QCoreApplication.translate("MainWindow", u"Stock Search", None))
         self.countrySelectBox.setItemText(0, QCoreApplication.translate("MainWindow", u"United States", None))
         self.countrySelectBox.setItemText(1, QCoreApplication.translate("MainWindow", u"Canada", None))
