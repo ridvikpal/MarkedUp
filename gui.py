@@ -16,9 +16,23 @@ import os
 import sys
 import connection
 from datetime import datetime
+import plotly.graph_objects as gpo
 import plotly.offline
 import requests
+import pandas as pd
+from threading import Thread
 
+# create a thread class that also returns a value on join()
+class ThreadWithReturnValue(Thread):
+    def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, Verbose=None):
+        Thread.__init__(self, group, target, name, args, kwargs)
+        self._return = None
+    def run(self):
+        if self._target is not None:
+            self._return = self._target(*self._args, **self._kwargs)
+    def join(self, *args):
+        Thread.join(self, *args)
+        return self._return
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -272,44 +286,51 @@ class Ui_MainWindow(object):
         try:
             # get data for specific stock
             stockSymbol = self.stockSearch.text()
-            self.updateStockQuote(stockSymbol)
-            self.updateStockPrice(stockSymbol)
-            self.updatePlotlyGraph(stockSymbol)
-            self.updateStockLogo(stockSymbol)
-            # quote = connection.getStockQuote(stockSymbol)
-            # imageURL = connection.getStockLogo(stockSymbol)
-            # stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
-            # livePrice = connection.getLivePrice(stockSymbol)
 
-            # # update the data table
-            # self.stockDataTable.setItem(0, 0, QTableWidgetItem(str(quote['symbol'][0])))
-            # self.stockDataTable.setItem(1, 0, QTableWidgetItem(str(quote['exchange'][0])))
-            # self.stockDataTable.setItem(2, 0, QTableWidgetItem(str(quote['mic_code'][0])))
-            # self.stockDataTable.setItem(3, 0, QTableWidgetItem(str(quote['currency'][0])))
-            # self.stockDataTable.setItem(4, 0, QTableWidgetItem(datetime.utcfromtimestamp(quote['timestamp'][0]).strftime('%Y-%m-%d %H:%M:%S')))
-            # self.stockDataTable.setItem(5, 0, QTableWidgetItem("{:.2f}".format(livePrice)))
-            # self.stockDataTable.setItem(6, 0, QTableWidgetItem(str(quote['open'][0])))
-            # self.stockDataTable.setItem(7, 0, QTableWidgetItem(str(quote['high'][0])))
-            # self.stockDataTable.setItem(8, 0, QTableWidgetItem(str(quote['low'][0])))
-            # self.stockDataTable.setItem(9, 0, QTableWidgetItem(str(quote['close'][0])))
-            # self.stockDataTable.setItem(10, 0, QTableWidgetItem(str(quote['volume'][0])))
-            # self.stockDataTable.setItem(11, 0, QTableWidgetItem(str(quote['previous_close'][0])))
-            # self.stockDataTable.setItem(12, 0, QTableWidgetItem(str(quote['change'][0])))
-            # self.stockDataTable.setItem(13, 0, QTableWidgetItem(str(quote['percent_change'][0]) + "%"))
-            # self.stockDataTable.setItem(14, 0, QTableWidgetItem(str(quote['average_volume'][0])))
+            quoteThread = ThreadWithReturnValue(target=connection.getStockQuote, args=(stockSymbol,))
+            priceThread = ThreadWithReturnValue(target=connection.getLivePrice, args=(stockSymbol,))
+            logoThread = ThreadWithReturnValue(target=connection.getStockLogo, args=(stockSymbol,))
+            plotlyGraphThread = ThreadWithReturnValue(target=connection.getStockTimeSeriesGraph, args=(stockSymbol,))
 
-            # # update the stock name
-            # self.stockName.setText(str(quote['name'][0]))
+            quoteThread.start()
+            priceThread.start()
+            logoThread.start()
+            plotlyGraphThread.start()
 
-            # # update the stock logo
-            # image = QImage()
-            # image.loadFromData(requests.get(imageURL).content)
-            # self.stockImage.setPixmap(QPixmap(image))
+            quote = quoteThread.join()
+            livePrice = priceThread.join()
+            imageURL = logoThread.join()
+            stockTimeSeriesGraph = plotlyGraphThread.join()
 
-            # # update the stock plotly graph
-            # plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
-            # file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
-            # self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+            # update the data table
+            self.stockDataTable.setItem(0, 0, QTableWidgetItem(str(quote['symbol'][0])))
+            self.stockDataTable.setItem(1, 0, QTableWidgetItem(str(quote['exchange'][0])))
+            self.stockDataTable.setItem(2, 0, QTableWidgetItem(str(quote['mic_code'][0])))
+            self.stockDataTable.setItem(3, 0, QTableWidgetItem(str(quote['currency'][0])))
+            self.stockDataTable.setItem(4, 0, QTableWidgetItem(datetime.utcfromtimestamp(quote['timestamp'][0]).strftime('%Y-%m-%d %H:%M:%S')))
+            self.stockDataTable.setItem(5, 0, QTableWidgetItem("{:.2f}".format(livePrice)))
+            self.stockDataTable.setItem(6, 0, QTableWidgetItem(str(quote['open'][0])))
+            self.stockDataTable.setItem(7, 0, QTableWidgetItem(str(quote['high'][0])))
+            self.stockDataTable.setItem(8, 0, QTableWidgetItem(str(quote['low'][0])))
+            self.stockDataTable.setItem(9, 0, QTableWidgetItem(str(quote['close'][0])))
+            self.stockDataTable.setItem(10, 0, QTableWidgetItem(str(quote['volume'][0])))
+            self.stockDataTable.setItem(11, 0, QTableWidgetItem(str(quote['previous_close'][0])))
+            self.stockDataTable.setItem(12, 0, QTableWidgetItem(str(quote['change'][0])))
+            self.stockDataTable.setItem(13, 0, QTableWidgetItem(str(quote['percent_change'][0]) + "%"))
+            self.stockDataTable.setItem(14, 0, QTableWidgetItem(str(quote['average_volume'][0])))
+
+            # update the stock name
+            self.stockName.setText(str(quote['name'][0]))
+
+            # update the stock logo
+            image = QImage()
+            image.loadFromData(requests.get(imageURL).content)
+            self.stockImage.setPixmap(QPixmap(image))
+
+            # update the stock plotly graph
+            plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
+            self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
 
         except Exception as e:
             errorMessage = QMessageBox()
@@ -319,40 +340,6 @@ class Ui_MainWindow(object):
             errorMessage.setInformativeText(str(e))
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
-    def updateStockPrice(self, stockSymbol: str) -> None:
-        livePrice = connection.getLivePrice(stockSymbol)
-        self.stockDataTable.setItem(5, 0, QTableWidgetItem("{:.2f}".format(livePrice)))
-
-    def updateStockQuote(self, stockSymbol: str) -> None:
-        quote = connection.getStockQuote(stockSymbol)
-
-        self.stockDataTable.setItem(0, 0, QTableWidgetItem(str(quote['symbol'][0])))
-        self.stockDataTable.setItem(1, 0, QTableWidgetItem(str(quote['exchange'][0])))
-        self.stockDataTable.setItem(2, 0, QTableWidgetItem(str(quote['mic_code'][0])))
-        self.stockDataTable.setItem(3, 0, QTableWidgetItem(str(quote['currency'][0])))
-        self.stockDataTable.setItem(4, 0, QTableWidgetItem(datetime.utcfromtimestamp(quote['timestamp'][0]).strftime('%Y-%m-%d %H:%M:%S')))
-        self.stockDataTable.setItem(6, 0, QTableWidgetItem(str(quote['open'][0])))
-        self.stockDataTable.setItem(7, 0, QTableWidgetItem(str(quote['high'][0])))
-        self.stockDataTable.setItem(8, 0, QTableWidgetItem(str(quote['low'][0])))
-        self.stockDataTable.setItem(9, 0, QTableWidgetItem(str(quote['close'][0])))
-        self.stockDataTable.setItem(10, 0, QTableWidgetItem(str(quote['volume'][0])))
-        self.stockDataTable.setItem(11, 0, QTableWidgetItem(str(quote['previous_close'][0])))
-        self.stockDataTable.setItem(12, 0, QTableWidgetItem(str(quote['change'][0])))
-        self.stockDataTable.setItem(13, 0, QTableWidgetItem(str(quote['percent_change'][0]) + "%"))
-        self.stockDataTable.setItem(14, 0, QTableWidgetItem(str(quote['average_volume'][0])))
-        self.stockName.setText(str(quote['name'][0]))
-
-    def updateStockLogo(self, stockSymbol: str) -> None:
-        imageURL = connection.getStockLogo(stockSymbol)
-        image = QImage()
-        image.loadFromData(requests.get(imageURL).content)
-        self.stockImage.setPixmap(QPixmap(image))
-
-    def updatePlotlyGraph(self, stockSymbol: str) -> None:
-        stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
-        plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
-        self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
 
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
