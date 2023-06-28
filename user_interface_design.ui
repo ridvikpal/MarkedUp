@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1426</width>
+    <width>1418</width>
     <height>830</height>
    </rect>
   </property>
@@ -54,7 +54,7 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>301</width>
+       <width>171</width>
        <height>31</height>
       </rect>
      </property>
@@ -65,6 +65,131 @@
       </font>
      </property>
     </widget>
+    <widget class="QComboBox" name="countrySelectBox">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>20</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>United States</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Canada</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>United Kingdom</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>India</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Japan</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>China</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Germany</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Taiwan</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Brazil</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Australia</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Switzerland</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Finland</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Indonesia</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Argentina</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Austria</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Netherlands</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mexico</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Sweden</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Israel</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Spain</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Turkey</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Singapore</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>South Africa</string>
+      </property>
+     </item>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="stockDataGroup">
     <property name="geometry">
@@ -72,7 +197,7 @@
       <x>1090</x>
       <y>80</y>
       <width>321</width>
-      <height>511</height>
+      <height>531</height>
      </rect>
     </property>
     <property name="title">
@@ -84,7 +209,7 @@
        <x>10</x>
        <y>150</y>
        <width>301</width>
-       <height>351</height>
+       <height>371</height>
       </rect>
      </property>
      <property name="font">
@@ -127,6 +252,11 @@
      <row>
       <property name="text">
        <string>TimeStamp</string>
+      </property>
+     </row>
+     <row>
+      <property name="text">
+       <string>Current Price</string>
       </property>
      </row>
      <row>
@@ -245,9 +375,9 @@
     <property name="geometry">
      <rect>
       <x>1090</x>
-      <y>610</y>
+      <y>620</y>
       <width>321</width>
-      <height>211</height>
+      <height>201</height>
      </rect>
     </property>
     <property name="title">
@@ -259,7 +389,7 @@
        <x>10</x>
        <y>20</y>
        <width>301</width>
-       <height>181</height>
+       <height>141</height>
       </rect>
      </property>
      <attribute name="horizontalHeaderStretchLastSection">
@@ -275,6 +405,42 @@
        <string>Name</string>
       </property>
      </column>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>301</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="addFavouritesButton">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="removeFavouritesButton">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>Remove</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
   </widget>

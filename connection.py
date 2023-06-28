@@ -68,7 +68,7 @@ def getStockQuote(symb: str) -> pd.DataFrame:
 # gets the live price for a specific stock
 def getLivePrice(symb: str) -> float:
     price = td.price(symbol=symb).as_json()
-    return price['price']
+    return float(price['price'])
 
 # get the company logo for a specific stock
 def getStockLogo(symb: str) -> str:
