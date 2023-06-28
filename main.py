@@ -6,7 +6,5 @@ def main() -> None:
     gui.createMainWindow()
     # gui.testFunction()
 
-
-
 if __name__ == "__main__":
     main()
