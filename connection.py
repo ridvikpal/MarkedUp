@@ -46,6 +46,7 @@ def getStockTimeSeriesGraph(symb: str) -> gpo.Figure:
 
     figure = time_series.as_plotly_figure()
     figure.update_layout(
+        title_text=None,
         xaxis=dict(
             rangeselector=dict(
                 buttons=list([
