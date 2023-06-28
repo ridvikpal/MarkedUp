@@ -27,10 +27,16 @@ class ThreadWithReturnValue(Thread):
     def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, Verbose=None):
         Thread.__init__(self, group, target, name, args, kwargs)
         self._return = None
+        self.__exception = None
     def run(self):
         if self._target is not None:
-            self._return = self._target(*self._args, **self._kwargs)
+            try:
+                self._return = self._target(*self._args, **self._kwargs)
+            except BaseException as e:
+                self.__exception = e
     def join(self, *args):
+        if self.__exception:
+            raise self.__exception
         Thread.join(self, *args)
         return self._return
 
