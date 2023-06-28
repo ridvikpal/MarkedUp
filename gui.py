@@ -16,10 +16,8 @@ import os
 import sys
 import connection
 from datetime import datetime
-import plotly.graph_objects as gpo
 import plotly.offline
 import requests
-import pandas as pd
 from threading import Thread
 
 # create a thread class that also returns a value on join()
@@ -356,15 +354,6 @@ def createMainWindow() -> None:
     sys.exit(app.exec_())
 
 def testFunction():
-    figure = connection.getStockTimeSeriesGraph("AAPL")
+    df = connection.getStockTimeSeries("AAPL")
+    figure = connection.createPlotlyGraph(df)
     figure.show()
-    # data.to_csv('test.csv', index=True)
-
-    # test = data['open'].values.tolist()
-
-    # # for x in test: print(x)
-
-    # print(test)
-
-    # figure = connection.createPlotlyGraph(data)
-    # figure.show()

@@ -34,6 +34,51 @@ def update_stocks_list() -> pd.DataFrame:
     df = pd.read_json("all_stocks.json")
     return df
 
+def createPlotlyGraph(timeSeries: pd.DataFrame) -> gpo.Figure:
+    figure = sub.make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        vertical_spacing=0.03,
+        subplot_titles=('Price', 'Volume'),
+        row_heights=[0.8, 0.2]
+    )
+
+    figure.add_trace(
+        gpo.Candlestick(
+            x=timeSeries.index,
+            open=timeSeries['open'],
+            high=timeSeries['high'],
+            low=timeSeries['low'],
+            close=timeSeries['close'],
+            name='Price'
+        ),
+        row=1,
+        col=1
+    )
+
+    figure.add_trace(
+        gpo.Bar(
+            x=timeSeries.index,
+            y=timeSeries['volume'],
+            name='Volume'
+            # showlegend=False
+        ),
+        row=2,
+        col=1
+    )
+
+    figure.update_layout(
+        xaxis=dict(
+            rangeslider=dict(
+                visible=False
+            ),
+            type='date'
+        )
+    )
+
+    return figure
+
 # gets historical stock information and returns it as a plotly figure (ready to graph)
 def getStockTimeSeriesGraph(symb: str) -> gpo.Figure:
     time_series = td.time_series(
