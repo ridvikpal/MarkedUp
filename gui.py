@@ -322,8 +322,7 @@ class Ui_MainWindow(object):
             stockSymbol = self.stockSearch.text()
             quote = connection.getStockQuote(stockSymbol)
             imageURL = connection.getStockLogo(stockSymbol)
-            stockTimeSeries = connection.getStockTimeSeries(stockSymbol)
-            stockTimeSeriesGraph = connection.createPlotlyGraph(stockTimeSeries)
+            stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
             livePrice = connection.getLivePrice(stockSymbol)
 
             # update the data table
@@ -375,8 +374,15 @@ def createMainWindow() -> None:
     sys.exit(app.exec_())
 
 def testFunction():
-    data = connection.getStockTimeSeriesGraph("AAPL")
+    figure = connection.getStockTimeSeriesGraph("AAPL")
+    figure.show()
     # data.to_csv('test.csv', index=True)
 
-    figure = connection.createPlotlyGraph(data)
-    figure.show()
+    # test = data['open'].values.tolist()
+
+    # # for x in test: print(x)
+
+    # print(test)
+
+    # figure = connection.createPlotlyGraph(data)
+    # figure.show()
