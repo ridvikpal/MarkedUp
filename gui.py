@@ -363,8 +363,6 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
-
-
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
     window = QMainWindow()
@@ -372,3 +370,10 @@ def createMainWindow() -> None:
     ui.setupUi(window)
     window.show()
     sys.exit(app.exec_())
+
+def testFunction():
+    data = connection.getStockTimeSeriesGraph("AAPL")
+    # data.to_csv('test.csv', index=True)
+
+    figure = connection.createPlotlyGraph(data)
+    figure.show()

@@ -8,7 +8,9 @@ from twelvedata import TDClient
 import pandas as pd
 from datetime import datetime
 import json
+import plotly.subplots as sub
 import plotly.graph_objects as gpo
+import pandas as pd
 
 ''' CREATE GLOBAL TDCLIENT OBJECT '''
 # allows data from TwelveData API
@@ -33,12 +35,12 @@ def update_stocks_list() -> pd.DataFrame:
     return df
 
 # gets historical stock information and returns it as a plotly figure (ready to graph)
-def getStockTimeSeriesGraph(symb: str, oneYear: bool = True) -> gpo.Figure:
+def getStockTimeSeriesGraph(symb: str, oneYear: bool = True) -> pd.DataFrame:
     if oneYear: # get data for 5 years
         time_series = td.time_series(
             symbol=symb,
             interval="1day",
-            outputsize=365,
+            outputsize=2000,
             end_date=datetime.today(),
             start_date=datetime(2000, 1, 1)
         )
@@ -50,7 +52,84 @@ def getStockTimeSeriesGraph(symb: str, oneYear: bool = True) -> gpo.Figure:
             end_date=datetime.today(),
             start_date=datetime(2000, 1, 1)
         )
-    return time_series.as_plotly_figure()
+    return time_series.as_pandas()
+
+def createPlotlyGraph(time_series: pd.DataFrame) -> gpo.Figure:
+    # we want to plot volume and stock price, so we need two rows
+    figure = sub.make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        row_heights=[0.8, 0.2],
+        vertical_spacing=0.02
+    )
+
+    # add the candlestick chart with the price information
+    figure.add_trace(
+        gpo.Candlestick(
+            x=time_series.index,
+            open=time_series['open'],
+            high=time_series['high'],
+            low=time_series['low'],
+            close=time_series['close']
+        ),
+        row=1,
+        col=1
+    )
+
+    # add the volume chart with the volume information
+    figure.add_trace(
+        gpo.Bar(
+            x=time_series.index,
+            y=time_series['volume']
+        ),
+        row=2,
+        col=1
+    )
+
+    # update the layout for formatting purposes
+    figure.update_layout(
+        xaxis=dict(
+            rangeselector=dict(
+                buttons=list([
+                    dict(count=1,
+                        label="1 Month",
+                        step="month",
+                        stepmode="backward"),
+                    dict(count=3,
+                         label="3 Months",
+                         step="month",
+                         stepmode="backward"),
+                    dict(count=6,
+                        label="6 Months",
+                        step="month",
+                        stepmode="backward"),
+                    dict(count=1,
+                        label="Year-To-Day",
+                        step="year",
+                        stepmode="todate"),
+                    dict(count=1,
+                        label="1 Year",
+                        step="year",
+                        stepmode="backward"),
+                    dict(label="5 Years",
+                        step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=False
+            ),
+            type="date"
+        ),
+        # yaxis1_title="Stock Price",
+        # yaxis2_title="Volume (M)",
+        # xaxis2_title="Time",
+        # xaxis1_rangeslider_visible = False,
+        # xaxis2_rangeslider_visible = True
+    )
+
+
+    return figure
 
 # lookup from the dataframe for a specific stock from partial name
 def getStockInformation(partialName: str, country: str, df: pd.DataFrame) -> pd.DataFrame:
