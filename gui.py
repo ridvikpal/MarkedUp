@@ -322,7 +322,8 @@ class Ui_MainWindow(object):
             stockSymbol = self.stockSearch.text()
             quote = connection.getStockQuote(stockSymbol)
             imageURL = connection.getStockLogo(stockSymbol)
-            stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
+            stockTimeSeries = connection.getStockTimeSeries(stockSymbol)
+            stockTimeSeriesGraph = connection.createPlotlyGraph(stockTimeSeries)
             livePrice = connection.getLivePrice(stockSymbol)
 
             # update the data table
@@ -351,9 +352,11 @@ class Ui_MainWindow(object):
             self.stockImage.setPixmap(QPixmap(image))
 
             # update the stock plotly graph
+
             plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
             file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+
         except Exception as e:
             errorMessage = QMessageBox()
             errorMessage.setWindowTitle("An error has occured")

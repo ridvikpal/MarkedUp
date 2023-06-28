@@ -52,6 +52,26 @@ def getStockTimeSeriesGraph(symb: str, oneYear: bool = True) -> pd.DataFrame:
             end_date=datetime.today(),
             start_date=datetime(2000, 1, 1)
         )
+    return time_series.as_plotly_figure()
+
+# gets historical stock information and returns it as a plotly figure (ready to graph)
+def getStockTimeSeries(symb: str, oneYear: bool = True) -> pd.DataFrame:
+    if oneYear: # get data for 5 years
+        time_series = td.time_series(
+            symbol=symb,
+            interval="1day",
+            outputsize=2000,
+            end_date=datetime.today(),
+            start_date=datetime(2000, 1, 1)
+        )
+    else: # get data for a month
+        time_series = td.time_series(
+            symbol=symb,
+            interval="1day",
+            outputsize=30,
+            end_date=datetime.today(),
+            start_date=datetime(2000, 1, 1)
+        )
     return time_series.as_pandas()
 
 def createPlotlyGraph(time_series: pd.DataFrame) -> gpo.Figure:
@@ -71,7 +91,8 @@ def createPlotlyGraph(time_series: pd.DataFrame) -> gpo.Figure:
             open=time_series['open'],
             high=time_series['high'],
             low=time_series['low'],
-            close=time_series['close']
+            close=time_series['close'],
+            name="Price"
         ),
         row=1,
         col=1
@@ -81,7 +102,8 @@ def createPlotlyGraph(time_series: pd.DataFrame) -> gpo.Figure:
     figure.add_trace(
         gpo.Bar(
             x=time_series.index,
-            y=time_series['volume']
+            y=time_series['volume'],
+            name="Volume"
         ),
         row=2,
         col=1
