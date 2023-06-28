@@ -72,7 +72,7 @@ class Ui_MainWindow(object):
         self.stockSearch.setFont(font)
 
         ### Run function on enter for stock search line edit
-        self.stockSearch.editingFinished.connect(self.enterStock)
+        self.stockSearch.returnPressed.connect(self.enterStock)
 
         self.countrySelectBox = QComboBox(self.stockSearchGroup)
         self.countrySelectBox.addItem("")
