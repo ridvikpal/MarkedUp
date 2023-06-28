@@ -317,42 +317,53 @@ class Ui_MainWindow(object):
 
     ### function to use when entering stock
     def enterStock(self) -> None:
-        # get data for specific stock
-        stockSymbol = self.stockSearch.text()
-        quote = connection.getStockQuote(stockSymbol)
-        imageURL = connection.getStockLogo(stockSymbol)
-        stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
-        livePrice = connection.getLivePrice(stockSymbol)
+        try:
+            # get data for specific stock
+            stockSymbol = self.stockSearch.text()
+            quote = connection.getStockQuote(stockSymbol)
+            imageURL = connection.getStockLogo(stockSymbol)
+            stockTimeSeriesGraph = connection.getStockTimeSeriesGraph(stockSymbol)
+            livePrice = connection.getLivePrice(stockSymbol)
 
-        # update the data table
-        self.stockDataTable.setItem(0, 0, QTableWidgetItem(str(quote['symbol'][0])))
-        self.stockDataTable.setItem(1, 0, QTableWidgetItem(str(quote['exchange'][0])))
-        self.stockDataTable.setItem(2, 0, QTableWidgetItem(str(quote['mic_code'][0])))
-        self.stockDataTable.setItem(3, 0, QTableWidgetItem(str(quote['currency'][0])))
-        self.stockDataTable.setItem(4, 0, QTableWidgetItem(datetime.utcfromtimestamp(quote['timestamp'][0]).strftime('%Y-%m-%d %H:%M:%S')))
-        self.stockDataTable.setItem(5, 0, QTableWidgetItem("{:.2f}".format(livePrice)))
-        self.stockDataTable.setItem(6, 0, QTableWidgetItem(str(quote['open'][0])))
-        self.stockDataTable.setItem(7, 0, QTableWidgetItem(str(quote['high'][0])))
-        self.stockDataTable.setItem(8, 0, QTableWidgetItem(str(quote['low'][0])))
-        self.stockDataTable.setItem(9, 0, QTableWidgetItem(str(quote['close'][0])))
-        self.stockDataTable.setItem(10, 0, QTableWidgetItem(str(quote['volume'][0])))
-        self.stockDataTable.setItem(11, 0, QTableWidgetItem(str(quote['previous_close'][0])))
-        self.stockDataTable.setItem(12, 0, QTableWidgetItem(str(quote['change'][0])))
-        self.stockDataTable.setItem(13, 0, QTableWidgetItem(str(quote['percent_change'][0]) + "%"))
-        self.stockDataTable.setItem(14, 0, QTableWidgetItem(str(quote['average_volume'][0])))
+            # update the data table
+            self.stockDataTable.setItem(0, 0, QTableWidgetItem(str(quote['symbol'][0])))
+            self.stockDataTable.setItem(1, 0, QTableWidgetItem(str(quote['exchange'][0])))
+            self.stockDataTable.setItem(2, 0, QTableWidgetItem(str(quote['mic_code'][0])))
+            self.stockDataTable.setItem(3, 0, QTableWidgetItem(str(quote['currency'][0])))
+            self.stockDataTable.setItem(4, 0, QTableWidgetItem(datetime.utcfromtimestamp(quote['timestamp'][0]).strftime('%Y-%m-%d %H:%M:%S')))
+            self.stockDataTable.setItem(5, 0, QTableWidgetItem("{:.2f}".format(livePrice)))
+            self.stockDataTable.setItem(6, 0, QTableWidgetItem(str(quote['open'][0])))
+            self.stockDataTable.setItem(7, 0, QTableWidgetItem(str(quote['high'][0])))
+            self.stockDataTable.setItem(8, 0, QTableWidgetItem(str(quote['low'][0])))
+            self.stockDataTable.setItem(9, 0, QTableWidgetItem(str(quote['close'][0])))
+            self.stockDataTable.setItem(10, 0, QTableWidgetItem(str(quote['volume'][0])))
+            self.stockDataTable.setItem(11, 0, QTableWidgetItem(str(quote['previous_close'][0])))
+            self.stockDataTable.setItem(12, 0, QTableWidgetItem(str(quote['change'][0])))
+            self.stockDataTable.setItem(13, 0, QTableWidgetItem(str(quote['percent_change'][0]) + "%"))
+            self.stockDataTable.setItem(14, 0, QTableWidgetItem(str(quote['average_volume'][0])))
 
-        # update the stock name
-        self.stockName.setText(str(quote['name'][0]))
+            # update the stock name
+            self.stockName.setText(str(quote['name'][0]))
 
-        # update the stock logo
-        image = QImage()
-        image.loadFromData(requests.get(imageURL).content)
-        self.stockImage.setPixmap(QPixmap(image))
+            # update the stock logo
+            image = QImage()
+            image.loadFromData(requests.get(imageURL).content)
+            self.stockImage.setPixmap(QPixmap(image))
 
-        # update the stock plotly graph
-        plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
-        self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+            # update the stock plotly graph
+            plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
+            self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+        except Exception as e:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Critical)
+            errorMessage.setText("There was an error with from the TwelveData API: ")
+            errorMessage.setInformativeText(str(e))
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
+
+
 
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
