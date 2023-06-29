@@ -112,7 +112,7 @@ def exportFilteredTimeSeriesGraph(timeSeries: pd.DataFrame, timeFilter: str = No
     if timeFilter:
         plotly.offline.plot(figure, filename=(timeFilter + ".html"), auto_open=False)
     else:
-        plotly.offline.plot(figure, filename="5 year.html", auto_open=False)
+        plotly.offline.plot(figure, filename="5 years.html", auto_open=False)
 
 
 # gets historical stock information and returns it as a plotly figure (ready to graph)

@@ -71,11 +71,17 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.oneMonthFilter.setFont(font)
 
+        # connect oneMonthFilter to show the right graph
+        self.oneMonthFilter.clicked.connect(self.showOneMonthGraph)
+
         self.horizontalLayout_3.addWidget(self.oneMonthFilter)
 
         self.threeMonthFilter = QPushButton(self.widget)
         self.threeMonthFilter.setObjectName(u"threeMonthFilter")
         self.threeMonthFilter.setFont(font)
+
+        # connect threeMonthFilter to show the right graph
+        self.threeMonthFilter.clicked.connect(self.showThreeMonthGraph)
 
         self.horizontalLayout_3.addWidget(self.threeMonthFilter)
 
@@ -83,17 +89,26 @@ class Ui_MainWindow(object):
         self.sixMonthFilter.setObjectName(u"sixMonthFilter")
         self.sixMonthFilter.setFont(font)
 
+        # connect sixMonthFilter to show the right graph
+        self.sixMonthFilter.clicked.connect(self.showSixMonthGraph)
+
         self.horizontalLayout_3.addWidget(self.sixMonthFilter)
 
         self.oneYearFilter = QPushButton(self.widget)
         self.oneYearFilter.setObjectName(u"oneYearFilter")
         self.oneYearFilter.setFont(font)
 
+        # connect oneYearFilter to show the right graph
+        self.oneYearFilter.clicked.connect(self.showOneYearGraph)
+
         self.horizontalLayout_3.addWidget(self.oneYearFilter)
 
         self.fiveYearFilter = QPushButton(self.widget)
         self.fiveYearFilter.setObjectName(u"fiveYearFilter")
         self.fiveYearFilter.setFont(font)
+
+        # connect fiveYearFilter to show the right graph
+        self.fiveYearFilter.clicked.connect(self.showFiveYearGraph)
 
         self.horizontalLayout_3.addWidget(self.fiveYearFilter)
 
@@ -354,19 +369,22 @@ class Ui_MainWindow(object):
             oneMonthGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "1 month"))
             threeMonthGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "3 months"))
             sixMonthGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "6 months"))
-            oneYearGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries,))
+            oneYearGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "1 year"))
+            fiveYearGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries,))
 
             # run all threads
             oneMonthGraphThread.start()
             threeMonthGraphThread.start()
             sixMonthGraphThread.start()
             oneYearGraphThread.start()
+            fiveYearGraphThread.start()
 
             # join all threads
             oneMonthGraphThread.join()
             threeMonthGraphThread.join()
             sixMonthGraphThread.join()
             oneYearGraphThread.join()
+            fiveYearGraphThread.join()
 
             # update the data table
             self.stockDataTable.setItem(0, 0, QTableWidgetItem(str(quote['symbol'][0])))
@@ -405,6 +423,46 @@ class Ui_MainWindow(object):
             errorMessage.setInformativeText(str(e))
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
+
+    def showOneMonthGraph(self) -> None:
+        try:
+            # update the stock plotly graph
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 month.html"))
+            self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+        except Exception as e:
+            print("Please enter a stock first")
+
+    def showThreeMonthGraph(self) -> None:
+        try:
+            # update the stock plotly graph
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months.html"))
+            self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+        except Exception as e:
+            print("Please enter a stock first")
+
+    def showSixMonthGraph(self) -> None:
+        try:
+            # update the stock plotly graph
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "6 months.html"))
+            self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+        except Exception as e:
+            print("Please enter a stock first")
+
+    def showOneYearGraph(self) -> None:
+        try:
+            # update the stock plotly graph
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 year.html"))
+            self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+        except Exception as e:
+            print("Please enter a stock first")
+
+    def showFiveYearGraph(self) -> None:
+        try:
+            # update the stock plotly graph
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "5 years.html"))
+            self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+        except Exception as e:
+            print("Please enter a stock first")
 
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
