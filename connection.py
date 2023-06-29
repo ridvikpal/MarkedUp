@@ -106,6 +106,7 @@ def createPlotlyGraph(timeSeries: pd.DataFrame) -> gpo.Figure:
 
     return figure
 
+# export the filtered time series graph to an html file
 def exportFilteredTimeSeriesGraph(timeSeries: pd.DataFrame, timeFilter: str = None) -> None:
     filteredTS = filterTimeSeries(timeSeries, timeFilter)
     figure = createPlotlyGraph(filteredTS)
@@ -114,75 +115,28 @@ def exportFilteredTimeSeriesGraph(timeSeries: pd.DataFrame, timeFilter: str = No
     else:
         plotly.offline.plot(figure, filename="5 years.html", auto_open=False)
 
-
 # gets historical stock information and returns it as a plotly figure (ready to graph)
-def getStockTimeSeriesGraph(symb: str) -> gpo.Figure:
+def getStockTimeSeries(symb: str, count: str) -> pd.DataFrame:
     time_series = td.time_series(
         symbol=symb,
         interval="1day",
         outputsize=2000,
-        end_date=datetime.today(),
-        start_date=datetime(2000, 1, 1)
-    )
-
-    figure = time_series.as_plotly_figure()
-    figure.update_layout(
-        title_text=None,
-        xaxis=dict(
-            rangeselector=dict(
-                buttons=list([
-                    dict(count=1,
-                        label="1 Month",
-                        step="month",
-                        stepmode="backward"),
-                    dict(count=3,
-                         label="3 Months",
-                         step="month",
-                         stepmode="backward"),
-                    dict(count=6,
-                        label="6 Months",
-                        step="month",
-                        stepmode="backward"),
-                    dict(count=1,
-                        label="Year-To-Day",
-                        step="year",
-                        stepmode="todate"),
-                    dict(count=1,
-                        label="1 Year",
-                        step="year",
-                        stepmode="backward"),
-                    dict(label="5 Years",
-                        step="all")
-                ])
-            ),
-            rangeslider=dict(
-                visible=False
-            ),
-            type="date"
-        )
-    )
-    return figure
-
-# gets historical stock information and returns it as a plotly figure (ready to graph)
-def getStockTimeSeries(symb: str, oneYear: bool = True) -> pd.DataFrame:
-    time_series = td.time_series(
-        symbol=symb,
-        interval="1day",
-        outputsize=2000,
+        country=count,
         end_date=datetime.today(),
         start_date=datetime(2000, 1, 1)
     )
     return time_series.as_pandas()
 
 # lookup from the dataframe for a specific stock from partial name
-def getStockInformation(partialName: str, country: str, df: pd.DataFrame) -> pd.DataFrame:
-    row = df[(df['name'].str.contains(pat=partialName, case=False)) & (df['country'] == country)]
+def getStockInformation(partialName: str, count: str, df: pd.DataFrame) -> pd.DataFrame:
+    row = df[(df['name'].str.contains(pat=partialName, case=False)) & (df['country'] == count)]
     return row
 
 # get a trading style quote for a specific stock
-def getStockQuote(symb: str) -> pd.DataFrame:
+def getStockQuote(symb: str, count: str) -> pd.DataFrame:
     stockQuote = td.quote(
         symbol=symb,
+        country=count,
         interval="5min"
     )
     return stockQuote.as_pandas()
@@ -193,7 +147,7 @@ def getLivePrice(symb: str) -> float:
     return float(price['price'])
 
 # get the company logo for a specific stock
-def getStockLogo(symb: str) -> str:
-    imageURL = td.get_logo(symbol=symb)
+def getStockLogo(symb: str, count: str) -> str:
+    imageURL = td.get_logo(symbol=symb, country=count)
     imageURL = imageURL.as_json()
     return imageURL['url']

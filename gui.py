@@ -348,11 +348,15 @@ class Ui_MainWindow(object):
         try:
             # get data for specific stock
             stockSymbol = self.stockSearch.text()
+            print(stockSymbol)
+            # get the country of the stock
+            stockCountry = self.countrySelectBox.currentText()
+            print(stockCountry)
 
-            quoteThread = ThreadWithReturnValue(target=connection.getStockQuote, args=(stockSymbol,))
+            quoteThread = ThreadWithReturnValue(target=connection.getStockQuote, args=(stockSymbol, stockCountry))
             priceThread = ThreadWithReturnValue(target=connection.getLivePrice, args=(stockSymbol,))
-            logoThread = ThreadWithReturnValue(target=connection.getStockLogo, args=(stockSymbol,))
-            timeSeriesThread = ThreadWithReturnValue(target=connection.getStockTimeSeries, args=(stockSymbol,))
+            logoThread = ThreadWithReturnValue(target=connection.getStockLogo, args=(stockSymbol, stockCountry))
+            timeSeriesThread = ThreadWithReturnValue(target=connection.getStockTimeSeries, args=(stockSymbol, stockCountry))
 
             quoteThread.start()
             priceThread.start()
@@ -363,6 +367,10 @@ class Ui_MainWindow(object):
             livePrice = priceThread.join()
             imageURL = logoThread.join()
             timeSeries = timeSeriesThread.join()
+            # quote = connection.getStockQuote(stockSymbol, stockCountry)
+            # livePrice = connection.getLivePrice(stockSymbol, stockCountry)
+            # imageURL = connection.getStockLogo(stockSymbol, stockCountry)
+            # timeSeries = connection.getStockTimeSeries(stockSymbol, stockCountry)
 
             # once the time series data is availible, now create all five graphs and store them locally
             oneMonthGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "1 month"))
@@ -497,7 +505,8 @@ def createMainWindow() -> None:
     sys.exit(app.exec_())
 
 def testFunction():
-    df = connection.getStockTimeSeries("AAPL")
-    connection.exportFilteredTimeSeriesGraph(df, "3 months")
+    df = connection.getStockTimeSeries("AAPL", "United States")
+    print(df)
+    # connection.exportFilteredTimeSeriesGraph(df, "3 months")
     # figure = connection.createPlotlyGraph(df)
     # figure.show()
