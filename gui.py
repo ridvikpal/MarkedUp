@@ -263,6 +263,9 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.loadFavouriteButton)
 
+        ### connect the load favourites function to the loadFavouriteButton
+        self.loadFavouriteButton.clicked.connect(self.loadFavourite)
+
         self.removeFavouritesButton = QPushButton(self.layoutWidget2)
         self.removeFavouritesButton.setObjectName(u"removeFavouritesButton")
         self.removeFavouritesButton.setFont(font2)
@@ -546,6 +549,22 @@ class Ui_MainWindow(object):
             if self.favouritesTable.rowCount() > 0:
                 rowToDelete = selectedFavourite.row()
                 self.favouritesTable.removeRow(rowToDelete)
+        except Exception as e:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Information)
+            errorMessage.setText("Please select a favourite first")
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
+
+    ### function to load the selected favourite
+    def loadFavourite(self) -> None:
+        try:
+            if self.favouritesTable.rowCount() > 0:
+                rowToLoad = selectedFavourite.row()
+                symbol = self.favouritesTable.item(rowToLoad, 0).text()
+                self.stockSearch.setText(symbol)
+                self.enterStock()
         except Exception as e:
             errorMessage = QMessageBox()
             errorMessage.setWindowTitle("An error has occured")
