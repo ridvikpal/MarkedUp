@@ -7,6 +7,7 @@ for getting the stock data
 from twelvedata import TDClient
 import pandas as pd
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import json
 import plotly.subplots as sub
 import plotly.graph_objects as gpo
@@ -34,7 +35,31 @@ def update_stocks_list() -> pd.DataFrame:
     df = pd.read_json("all_stocks.json")
     return df
 
-def createPlotlyGraph(timeSeries: pd.DataFrame) -> gpo.Figure:
+# this function will filter the data for a specific time
+def filterTimeSeries(timeSeries: pd.DataFrame, timeFilter: str) -> pd.DataFrame:
+    today = datetime.today().date()
+    today = pd.Timestamp(today)
+    # today = today.strftime("%Y-%m-%d")
+    match timeFilter:
+        case "1 month":
+            one_month = datetime.today().date() + relativedelta(months=-1)
+            one_month = pd.Timestamp(one_month)
+            return timeSeries.loc[(timeSeries.index >= one_month) & (timeSeries.index <= today)]
+        case "3 months":
+            three_months = datetime.today().date() + relativedelta(months=-3)
+            three_months = pd.Timestamp(three_months)
+            return timeSeries.loc[(timeSeries.index >= three_months) & (timeSeries.index <= today)]
+        case "6 months":
+            six_months = datetime.today().date() + relativedelta(months=-6)
+            six_months = pd.Timestamp(six_months)
+            return timeSeries.loc[(timeSeries.index >= six_months) & (timeSeries.index <= today)]
+        case "1 year":
+            one_year = datetime.today().date() + relativedelta(years=-1)
+            one_year = pd.Timestamp(one_year)
+            return timeSeries.loc[(timeSeries.index >= one_year) & (timeSeries.index <= today)]
+    return timeSeries
+
+def createPlotlyGraph(timeSeries: pd.DataFrame, timeFrame: str) -> gpo.Figure:
     figure = sub.make_subplots(
         rows=2,
         cols=1,

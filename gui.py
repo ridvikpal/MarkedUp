@@ -355,5 +355,7 @@ def createMainWindow() -> None:
 
 def testFunction():
     df = connection.getStockTimeSeries("AAPL")
-    figure = connection.createPlotlyGraph(df)
-    figure.show()
+    another = connection.filterTimeSeries(df, "6 months")
+    print(another)
+    # figure = connection.createPlotlyGraph(df)
+    # figure.show()
