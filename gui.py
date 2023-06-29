@@ -338,17 +338,35 @@ class Ui_MainWindow(object):
             quoteThread = ThreadWithReturnValue(target=connection.getStockQuote, args=(stockSymbol,))
             priceThread = ThreadWithReturnValue(target=connection.getLivePrice, args=(stockSymbol,))
             logoThread = ThreadWithReturnValue(target=connection.getStockLogo, args=(stockSymbol,))
-            plotlyGraphThread = ThreadWithReturnValue(target=connection.getStockTimeSeriesGraph, args=(stockSymbol,))
+            timeSeriesThread = ThreadWithReturnValue(target=connection.getStockTimeSeries, args=(stockSymbol,))
 
             quoteThread.start()
             priceThread.start()
             logoThread.start()
-            plotlyGraphThread.start()
+            timeSeriesThread.start()
 
             quote = quoteThread.join()
             livePrice = priceThread.join()
             imageURL = logoThread.join()
-            stockTimeSeriesGraph = plotlyGraphThread.join()
+            timeSeries = timeSeriesThread.join()
+
+            # once the time series data is availible, now create all five graphs and store them locally
+            oneMonthGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "1 month"))
+            threeMonthGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "3 months"))
+            sixMonthGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "6 months"))
+            oneYearGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries,))
+
+            # run all threads
+            oneMonthGraphThread.start()
+            threeMonthGraphThread.start()
+            sixMonthGraphThread.start()
+            oneYearGraphThread.start()
+
+            # join all threads
+            oneMonthGraphThread.join()
+            threeMonthGraphThread.join()
+            sixMonthGraphThread.join()
+            oneYearGraphThread.join()
 
             # update the data table
             self.stockDataTable.setItem(0, 0, QTableWidgetItem(str(quote['symbol'][0])))
@@ -376,8 +394,7 @@ class Ui_MainWindow(object):
             self.stockImage.setPixmap(QPixmap(image))
 
             # update the stock plotly graph
-            plotly.offline.plot(stockTimeSeriesGraph, filename='figure.html', auto_open=False)
-            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "figure.html"))
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months.html"))
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
 
         except Exception as e:
@@ -399,7 +416,6 @@ def createMainWindow() -> None:
 
 def testFunction():
     df = connection.getStockTimeSeries("AAPL")
-    another = connection.filterTimeSeries(df, "6 months")
-    print(another)
+    connection.exportFilteredTimeSeriesGraph(df, "3 months")
     # figure = connection.createPlotlyGraph(df)
     # figure.show()

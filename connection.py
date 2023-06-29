@@ -10,6 +10,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import json
 import plotly.subplots as sub
+import plotly.offline
 import plotly.graph_objects as gpo
 import pandas as pd
 
@@ -36,7 +37,7 @@ def update_stocks_list() -> pd.DataFrame:
     return df
 
 # this function will filter the data for a specific time
-def filterTimeSeries(timeSeries: pd.DataFrame, timeFilter: str) -> pd.DataFrame:
+def filterTimeSeries(timeSeries: pd.DataFrame, timeFilter: str = None) -> pd.DataFrame:
     today = datetime.today().date()
     today = pd.Timestamp(today)
     # today = today.strftime("%Y-%m-%d")
@@ -60,7 +61,7 @@ def filterTimeSeries(timeSeries: pd.DataFrame, timeFilter: str) -> pd.DataFrame:
     return timeSeries
 
 # create a plotly graph from a timeseries
-def createPlotlyGraph(timeSeries: pd.DataFrame, timeFrame: str) -> gpo.Figure:
+def createPlotlyGraph(timeSeries: pd.DataFrame) -> gpo.Figure:
     figure = sub.make_subplots(
         rows=2,
         cols=1,
@@ -104,6 +105,15 @@ def createPlotlyGraph(timeSeries: pd.DataFrame, timeFrame: str) -> gpo.Figure:
     )
 
     return figure
+
+def exportFilteredTimeSeriesGraph(timeSeries: pd.DataFrame, timeFilter: str = None) -> None:
+    filteredTS = filterTimeSeries(timeSeries, timeFilter)
+    figure = createPlotlyGraph(filteredTS)
+    if timeFilter:
+        plotly.offline.plot(figure, filename=(timeFilter + ".html"), auto_open=False)
+    else:
+        plotly.offline.plot(figure, filename="5 year.html", auto_open=False)
+
 
 # gets historical stock information and returns it as a plotly figure (ready to graph)
 def getStockTimeSeriesGraph(symb: str) -> gpo.Figure:
