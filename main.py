@@ -24,6 +24,7 @@ def main() -> None:
 
     gui.createMainWindow()
     # gui.testFunction()
+    # gui.initFavourites()
 
 if __name__ == "__main__":
     main()

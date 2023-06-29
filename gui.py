@@ -18,6 +18,7 @@ import connection
 from datetime import datetime
 import requests
 from threading import Thread
+import json
 
 # create a thread class that also returns a value on join()
 class ThreadWithReturnValue(Thread):
@@ -242,6 +243,10 @@ class Ui_MainWindow(object):
         self.favouritesTable.setObjectName(u"favouritesTable")
         self.favouritesTable.setGeometry(QRect(10, 20, 301, 141))
         self.favouritesTable.horizontalHeader().setStretchLastSection(True)
+
+        ### initialize the favourites table
+        self.initalizaFavourites()
+
         self.layoutWidget2 = QWidget(self.favouritesGroup)
         self.layoutWidget2.setObjectName(u"layoutWidget2")
         self.layoutWidget2.setGeometry(QRect(10, 170, 301, 25))
@@ -573,6 +578,19 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
+    ### function to load favourites stored in json file
+    def initalizaFavourites(self) -> None:
+        if os.path.isfile('saved_favourites.json'):
+            savedFavourites = json.load(open('saved_favourites.json'))
+            for symbol in savedFavourites:
+                currentRowCount = self.favouritesTable.rowCount()
+                self.favouritesTable.insertRow(currentRowCount)
+
+                self.favouritesTable.setItem(currentRowCount, 0, QTableWidgetItem(symbol))
+                self.favouritesTable.setItem(currentRowCount, 1, QTableWidgetItem(savedFavourites[symbol]))
+        else:
+            open('saved_favourites.json', 'w').close()
+
 ### function to create main window
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
@@ -580,7 +598,9 @@ def createMainWindow() -> None:
     ui = Ui_MainWindow()
     ui.setupUi(window)
     window.show()
-    sys.exit(app.exec_())
+    run = app.exec_()
+
+    sys.exit(run)
 
 ### function used to test things
 def testFunction():
@@ -589,3 +609,8 @@ def testFunction():
     # connection.exportFilteredTimeSeriesGraph(df, "3 months")
     # figure = connection.createPlotlyGraph(df)
     # figure.show()
+
+def initFavourites() -> None:
+        if os.path.isfile('saved_favourites.json'):
+            savedFavourites = json.load(open('saved_favourites.json'))
+            print(savedFavourites)
