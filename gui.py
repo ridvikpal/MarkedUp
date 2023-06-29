@@ -591,8 +591,8 @@ class Ui_MainWindow(object):
 
     ### function to load favourites stored in json file
     def initalizaFavourites(self) -> None:
+        global savedFavourites
         if os.path.isfile('saved_favourites.json'):
-            global savedFavourites
             savedFavourites = json.load(open('saved_favourites.json'))
             for symbol in savedFavourites:
                 currentRowCount = self.favouritesTable.rowCount()
@@ -602,6 +602,7 @@ class Ui_MainWindow(object):
                 self.favouritesTable.setItem(currentRowCount, 1, QTableWidgetItem(savedFavourites[symbol]))
         else:
             open('saved_favourites.json', 'w').close()
+            savedFavourites = dict()
 
 ### function to create main window
 def createMainWindow() -> None:
