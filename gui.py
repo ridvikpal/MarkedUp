@@ -535,6 +535,12 @@ class Ui_MainWindow(object):
 
             self.favouritesTable.setItem(currentRowCount, 0, QTableWidgetItem(symbol))
             self.favouritesTable.setItem(currentRowCount, 1, QTableWidgetItem(name))
+
+            savedFavourites.update({symbol:name})
+
+            with open('saved_favourites.json', 'w') as f:
+                json.dump(savedFavourites, f)
+
         else:
             errorMessage = QMessageBox()
             errorMessage.setWindowTitle("An error has occured")
@@ -581,6 +587,7 @@ class Ui_MainWindow(object):
     ### function to load favourites stored in json file
     def initalizaFavourites(self) -> None:
         if os.path.isfile('saved_favourites.json'):
+            global savedFavourites
             savedFavourites = json.load(open('saved_favourites.json'))
             for symbol in savedFavourites:
                 currentRowCount = self.favouritesTable.rowCount()
