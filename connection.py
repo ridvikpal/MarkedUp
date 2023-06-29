@@ -59,6 +59,7 @@ def filterTimeSeries(timeSeries: pd.DataFrame, timeFilter: str) -> pd.DataFrame:
             return timeSeries.loc[(timeSeries.index >= one_year) & (timeSeries.index <= today)]
     return timeSeries
 
+# create a plotly graph from a timeseries
 def createPlotlyGraph(timeSeries: pd.DataFrame, timeFrame: str) -> gpo.Figure:
     figure = sub.make_subplots(
         rows=2,
