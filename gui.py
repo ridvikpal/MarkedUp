@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'user_interface_designsepUnr.ui'
+## Form generated from reading UI file 'user_interface_designguswOV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -37,11 +37,12 @@ class ThreadWithReturnValue(Thread):
         Thread.join(self, *args)
         return self._return
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1415, 830)
+        MainWindow.resize(1419, 830)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.plotlyGroup = QGroupBox(self.centralwidget)
@@ -57,59 +58,59 @@ class Ui_MainWindow(object):
         self.plotlyGraph.setObjectName(u"plotlyGraph")
         self.plotlyGraph.setGeometry(QRect(10, 70, 1051, 731))
 
-        self.widget = QWidget(self.plotlyGroup)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(10, 20, 1051, 41))
-        self.horizontalLayout_3 = QHBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.plotlyGroup)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(10, 20, 1051, 41))
+        self.horizontalLayout_3 = QHBoxLayout(self.layoutWidget)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.oneMonthFilter = QPushButton(self.widget)
+        self.oneMonthFilter = QPushButton(self.layoutWidget)
         self.oneMonthFilter.setObjectName(u"oneMonthFilter")
         font = QFont()
         font.setFamily(u"Arial")
         font.setPointSize(10)
         self.oneMonthFilter.setFont(font)
 
-        # connect oneMonthFilter to show the right graph
+        ### connect oneMonthFilter to show the right graph
         self.oneMonthFilter.clicked.connect(self.showOneMonthGraph)
 
         self.horizontalLayout_3.addWidget(self.oneMonthFilter)
 
-        self.threeMonthFilter = QPushButton(self.widget)
+        self.threeMonthFilter = QPushButton(self.layoutWidget)
         self.threeMonthFilter.setObjectName(u"threeMonthFilter")
         self.threeMonthFilter.setFont(font)
 
-        # connect threeMonthFilter to show the right graph
-        self.threeMonthFilter.clicked.connect(self.showThreeMonthGraph)
-
         self.horizontalLayout_3.addWidget(self.threeMonthFilter)
 
-        self.sixMonthFilter = QPushButton(self.widget)
+        ### connect threeMonthFilter to show the right graph
+        self.threeMonthFilter.clicked.connect(self.showThreeMonthGraph)
+
+        self.sixMonthFilter = QPushButton(self.layoutWidget)
         self.sixMonthFilter.setObjectName(u"sixMonthFilter")
         self.sixMonthFilter.setFont(font)
 
-        # connect sixMonthFilter to show the right graph
-        self.sixMonthFilter.clicked.connect(self.showSixMonthGraph)
-
         self.horizontalLayout_3.addWidget(self.sixMonthFilter)
 
-        self.oneYearFilter = QPushButton(self.widget)
+        ### connect sixMonthFilter to show the right graph
+        self.sixMonthFilter.clicked.connect(self.showSixMonthGraph)
+
+        self.oneYearFilter = QPushButton(self.layoutWidget)
         self.oneYearFilter.setObjectName(u"oneYearFilter")
         self.oneYearFilter.setFont(font)
 
-        # connect oneYearFilter to show the right graph
-        self.oneYearFilter.clicked.connect(self.showOneYearGraph)
-
         self.horizontalLayout_3.addWidget(self.oneYearFilter)
 
-        self.fiveYearFilter = QPushButton(self.widget)
+        ### connect oneYearFilter to show the right graph
+        self.oneYearFilter.clicked.connect(self.showOneYearGraph)
+
+        self.fiveYearFilter = QPushButton(self.layoutWidget)
         self.fiveYearFilter.setObjectName(u"fiveYearFilter")
         self.fiveYearFilter.setFont(font)
 
-        # connect fiveYearFilter to show the right graph
-        self.fiveYearFilter.clicked.connect(self.showFiveYearGraph)
-
         self.horizontalLayout_3.addWidget(self.fiveYearFilter)
+
+        ### connect fiveYearFilter to show the right graph
+        self.fiveYearFilter.clicked.connect(self.showFiveYearGraph)
 
         self.stockSearchGroup = QGroupBox(self.centralwidget)
         self.stockSearchGroup.setObjectName(u"stockSearchGroup")
@@ -200,13 +201,13 @@ class Ui_MainWindow(object):
         self.stockDataTable.horizontalHeader().setDefaultSectionSize(200)
         self.stockDataTable.verticalHeader().setMinimumSectionSize(23)
         self.stockDataTable.verticalHeader().setDefaultSectionSize(23)
-        self.layoutWidget = QWidget(self.stockDataGroup)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 20, 301, 121))
-        self.horizontalLayout = QHBoxLayout(self.layoutWidget)
+        self.layoutWidget1 = QWidget(self.stockDataGroup)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.layoutWidget1.setGeometry(QRect(10, 20, 301, 121))
+        self.horizontalLayout = QHBoxLayout(self.layoutWidget1)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.stockImage = QLabel(self.layoutWidget)
+        self.stockImage = QLabel(self.layoutWidget1)
         self.stockImage.setObjectName(u"stockImage")
         font3 = QFont()
         font3.setPointSize(14)
@@ -218,7 +219,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.stockImage)
 
-        self.stockName = QLabel(self.layoutWidget)
+        self.stockName = QLabel(self.layoutWidget1)
         self.stockName.setObjectName(u"stockName")
         self.stockName.setFont(font3)
         self.stockName.setFrameShape(QFrame.NoFrame)
@@ -241,26 +242,34 @@ class Ui_MainWindow(object):
         self.favouritesTable.setObjectName(u"favouritesTable")
         self.favouritesTable.setGeometry(QRect(10, 20, 301, 141))
         self.favouritesTable.horizontalHeader().setStretchLastSection(True)
-        self.layoutWidget1 = QWidget(self.favouritesGroup)
-        self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(10, 170, 301, 25))
-        self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget1)
+        self.layoutWidget2 = QWidget(self.favouritesGroup)
+        self.layoutWidget2.setObjectName(u"layoutWidget2")
+        self.layoutWidget2.setGeometry(QRect(10, 170, 301, 25))
+        self.horizontalLayout_2 = QHBoxLayout(self.layoutWidget2)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.addFavouritesButton = QPushButton(self.layoutWidget1)
+        self.addFavouritesButton = QPushButton(self.layoutWidget2)
         self.addFavouritesButton.setObjectName(u"addFavouritesButton")
         self.addFavouritesButton.setFont(font2)
 
-        self.addFavouritesButton.clicked.connect(self.addFavourite)
-
         self.horizontalLayout_2.addWidget(self.addFavouritesButton)
 
-        self.removeFavouritesButton = QPushButton(self.layoutWidget1)
+        ### connect addFavourite function to addFavouritesButton
+        self.addFavouritesButton.clicked.connect(self.addFavourite)
+
+        self.loadFavouriteButton = QPushButton(self.layoutWidget2)
+        self.loadFavouriteButton.setObjectName(u"loadFavouriteButton")
+        self.loadFavouriteButton.setFont(font2)
+
+        self.horizontalLayout_2.addWidget(self.loadFavouriteButton)
+
+        self.removeFavouritesButton = QPushButton(self.layoutWidget2)
         self.removeFavouritesButton.setObjectName(u"removeFavouritesButton")
         self.removeFavouritesButton.setFont(font2)
 
         self.horizontalLayout_2.addWidget(self.removeFavouritesButton)
 
+        ### connect removeFavourite function to removeFavouritesButton
         self.removeFavouritesButton.clicked.connect(self.removeFavourite)
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -343,10 +352,12 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Symbol", None));
         ___qtablewidgetitem17 = self.favouritesTable.horizontalHeaderItem(1)
 
+        ### get the clicked favourite
         self.favouritesTable.cellClicked.connect(self.getClickedCell)
 
         ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Name", None));
         self.addFavouritesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
+        self.loadFavouriteButton.setText(QCoreApplication.translate("MainWindow", u"Load", None))
         self.removeFavouritesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
     # retranslateUi
 
@@ -436,6 +447,7 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
+    ### function to show the one month graph
     def showOneMonthGraph(self) -> None:
         file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 month.html"))
         if os.path.isfile(file_path):
@@ -449,6 +461,7 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
+    ### function to show the three month graph
     def showThreeMonthGraph(self) -> None:
         file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months.html"))
         if os.path.isfile(file_path):
@@ -462,6 +475,7 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
+    ### function to show the six month graph
     def showSixMonthGraph(self) -> None:
         file_path = os.path.abspath(os.path.join(os.path.dirname(__file__),  "6 months.html"))
         if os.path.isfile(file_path):
@@ -475,6 +489,7 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
+    ### function to show the one year graph
     def showOneYearGraph(self) -> None:
         file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 year.html"))
         if os.path.isfile(file_path):
@@ -488,6 +503,7 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
+    ### function to show the five year graph
     def showFiveYearGraph(self) -> None:
         file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "5 years.html"))
         if os.path.isfile(file_path):
@@ -501,6 +517,7 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
+    ### function to add favourites
     def addFavourite(self):
         name = self.stockName.text()
         symbol = self.stockDataTable.item(0, 0).text()
@@ -518,10 +535,12 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
+    ### function to get the clicked favourites cell
     def getClickedCell(self, row, column) -> None:
         global selectedFavourite
         selectedFavourite = self.favouritesTable.item(row, column)
 
+    ### function to remove favourites
     def removeFavourite(self) -> None:
         try:
             if self.favouritesTable.rowCount() > 0:
@@ -531,11 +550,11 @@ class Ui_MainWindow(object):
             errorMessage = QMessageBox()
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
-            errorMessage.setText("Please select a stock first")
+            errorMessage.setText("Please select a favourite first")
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
-
+### function to create main window
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
     window = QMainWindow()
@@ -544,6 +563,7 @@ def createMainWindow() -> None:
     window.show()
     sys.exit(app.exec_())
 
+### function used to test things
 def testFunction():
     df = connection.getStockTimeSeries("AAPL", "United States")
     print(df)

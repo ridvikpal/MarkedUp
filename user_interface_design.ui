@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1415</width>
+    <width>1419</width>
     <height>830</height>
    </rect>
   </property>
@@ -36,7 +36,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -502,6 +502,18 @@
         </property>
         <property name="text">
          <string>Add</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="loadFavouriteButton">
+        <property name="font">
+         <font>
+          <family>Arial</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>Load</string>
         </property>
        </widget>
       </item>
