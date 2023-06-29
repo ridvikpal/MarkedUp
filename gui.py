@@ -261,6 +261,8 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.removeFavouritesButton)
 
+        self.removeFavouritesButton.clicked.connect(self.removeFavourite)
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -340,6 +342,8 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem16 = self.favouritesTable.horizontalHeaderItem(0)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Symbol", None));
         ___qtablewidgetitem17 = self.favouritesTable.horizontalHeaderItem(1)
+
+        self.favouritesTable.cellClicked.connect(self.getClickedCell)
 
         ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Name", None));
         self.addFavouritesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
@@ -514,16 +518,16 @@ class Ui_MainWindow(object):
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
-    def removeFavourite(self):
-        name = self.stockName.text()
-        symbol = self.stockDataTable.item(0, 0).text()
-        if name and symbol and self.favouritesTable.rowCount() > 0:
-            currentRowCount = self.favouritesTable.rowCount()
-            self.favouritesTable.removeRow(currentRowCount)
+    def getClickedCell(self, row, column) -> None:
+        global selectedFavourite
+        selectedFavourite = self.favouritesTable.item(row, column)
 
-            self.favouritesTable.setItem(currentRowCount, 0, QTableWidgetItem(symbol))
-            self.favouritesTable.setItem(currentRowCount, 1, QTableWidgetItem(name))
-        else:
+    def removeFavourite(self) -> None:
+        try:
+            if self.favouritesTable.rowCount() > 0:
+                rowToDelete = selectedFavourite.row()
+                self.favouritesTable.removeRow(rowToDelete)
+        except Exception as e:
             errorMessage = QMessageBox()
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
