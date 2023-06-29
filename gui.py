@@ -540,7 +540,6 @@ class Ui_MainWindow(object):
 
             with open('saved_favourites.json', 'w') as f:
                 json.dump(savedFavourites, f)
-
         else:
             errorMessage = QMessageBox()
             errorMessage.setWindowTitle("An error has occured")
@@ -559,7 +558,13 @@ class Ui_MainWindow(object):
         try:
             if self.favouritesTable.rowCount() > 0:
                 rowToDelete = selectedFavourite.row()
+                symbol = self.favouritesTable.item(rowToDelete, 0).text()
+
                 self.favouritesTable.removeRow(rowToDelete)
+                del savedFavourites[symbol]
+
+                with open('saved_favourites.json', 'w') as f:
+                    json.dump(savedFavourites, f)
         except Exception as e:
             errorMessage = QMessageBox()
             errorMessage.setWindowTitle("An error has occured")
