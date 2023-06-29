@@ -16,7 +16,6 @@ import os
 import sys
 import connection
 from datetime import datetime
-import plotly.offline
 import requests
 from threading import Thread
 
@@ -419,50 +418,75 @@ class Ui_MainWindow(object):
             errorMessage = QMessageBox()
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Critical)
-            errorMessage.setText("There was an error with from the TwelveData API: ")
+            errorMessage.setText("There was an error with the TwelveData API: ")
             errorMessage.setInformativeText(str(e))
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
 
     def showOneMonthGraph(self) -> None:
-        try:
+        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 month.html"))
+        if os.path.isfile(file_path):
             # update the stock plotly graph
-            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 month.html"))
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
-        except Exception as e:
-            print("Please enter a stock first")
+        else:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Information)
+            errorMessage.setText("Please select a stock first")
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
 
     def showThreeMonthGraph(self) -> None:
-        try:
+        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months.html"))
+        if os.path.isfile(file_path):
             # update the stock plotly graph
-            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months.html"))
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
-        except Exception as e:
-            print("Please enter a stock first")
+        else:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Information)
+            errorMessage.setText("Please select a stock first")
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
 
     def showSixMonthGraph(self) -> None:
-        try:
+        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__),  "6 months.html"))
+        if os.path.isfile(file_path):
             # update the stock plotly graph
-            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "6 months.html"))
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
-        except Exception as e:
-            print("Please enter a stock first")
+        else:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Information)
+            errorMessage.setText("Please select a stock first")
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
 
     def showOneYearGraph(self) -> None:
-        try:
+        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 year.html"))
+        if os.path.isfile(file_path):
             # update the stock plotly graph
-            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 year.html"))
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
-        except Exception as e:
-            print("Please enter a stock first")
+        else:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Information)
+            errorMessage.setText("Please select a stock first")
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
 
     def showFiveYearGraph(self) -> None:
-        try:
+        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "5 years.html"))
+        if os.path.isfile(file_path):
             # update the stock plotly graph
-            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "5 years.html"))
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
-        except Exception as e:
-            print("Please enter a stock first")
+        else:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Information)
+            errorMessage.setText("Please select a stock first")
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
 
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
