@@ -128,7 +128,8 @@ def getStockTimeSeries(symb: str, count: str) -> pd.DataFrame:
     return time_series.as_pandas()
 
 # lookup from the dataframe for a specific stock from partial name
-def getStockInformation(partialName: str, count: str, df: pd.DataFrame) -> pd.DataFrame:
+def getStockInformation(partialName: str, count: str) -> pd.DataFrame:
+    df = pd.read_json("all_stocks.json")
     row = df[(df['name'].str.contains(pat=partialName, case=False)) & (df['country'] == count)]
     return row
 

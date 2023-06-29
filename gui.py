@@ -251,6 +251,8 @@ class Ui_MainWindow(object):
         self.addFavouritesButton.setObjectName(u"addFavouritesButton")
         self.addFavouritesButton.setFont(font2)
 
+        self.addFavouritesButton.clicked.connect(self.addFavourite)
+
         self.horizontalLayout_2.addWidget(self.addFavouritesButton)
 
         self.removeFavouritesButton = QPushButton(self.layoutWidget1)
@@ -338,6 +340,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem16 = self.favouritesTable.horizontalHeaderItem(0)
         ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"Symbol", None));
         ___qtablewidgetitem17 = self.favouritesTable.horizontalHeaderItem(1)
+
         ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"Name", None));
         self.addFavouritesButton.setText(QCoreApplication.translate("MainWindow", u"Add", None))
         self.removeFavouritesButton.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
@@ -348,10 +351,8 @@ class Ui_MainWindow(object):
         try:
             # get data for specific stock
             stockSymbol = self.stockSearch.text()
-            print(stockSymbol)
             # get the country of the stock
             stockCountry = self.countrySelectBox.currentText()
-            print(stockCountry)
 
             quoteThread = ThreadWithReturnValue(target=connection.getStockQuote, args=(stockSymbol, stockCountry))
             priceThread = ThreadWithReturnValue(target=connection.getLivePrice, args=(stockSymbol,))
@@ -495,6 +496,41 @@ class Ui_MainWindow(object):
             errorMessage.setText("Please select a stock first")
             errorMessage.setStandardButtons(QMessageBox.Ok)
             errorMessage.exec_()
+
+    def addFavourite(self):
+        name = self.stockName.text()
+        symbol = self.stockDataTable.item(0, 0).text()
+        if name and symbol:
+            currentRowCount = self.favouritesTable.rowCount()
+            self.favouritesTable.insertRow(currentRowCount)
+
+            self.favouritesTable.setItem(currentRowCount, 0, QTableWidgetItem(symbol))
+            self.favouritesTable.setItem(currentRowCount, 1, QTableWidgetItem(name))
+        else:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Information)
+            errorMessage.setText("Please select a stock first")
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
+
+    def removeFavourite(self):
+        name = self.stockName.text()
+        symbol = self.stockDataTable.item(0, 0).text()
+        if name and symbol and self.favouritesTable.rowCount() > 0:
+            currentRowCount = self.favouritesTable.rowCount()
+            self.favouritesTable.removeRow(currentRowCount)
+
+            self.favouritesTable.setItem(currentRowCount, 0, QTableWidgetItem(symbol))
+            self.favouritesTable.setItem(currentRowCount, 1, QTableWidgetItem(name))
+        else:
+            errorMessage = QMessageBox()
+            errorMessage.setWindowTitle("An error has occured")
+            errorMessage.setIcon(QMessageBox.Information)
+            errorMessage.setText("Please select a stock first")
+            errorMessage.setStandardButtons(QMessageBox.Ok)
+            errorMessage.exec_()
+
 
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
