@@ -19,6 +19,7 @@ from datetime import datetime
 import requests
 from threading import Thread
 import json
+import qdarkstyle
 
 # create a thread class that also returns a value on join()
 class ThreadWithReturnValue(Thread):
@@ -608,6 +609,11 @@ class Ui_MainWindow(object):
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
     window = QMainWindow()
+
+    # setup stylesheet
+    style = qdarkstyle.load_stylesheet(palette=qdarkstyle.LightPalette)
+    app.setStyleSheet(style)
+
     ui = Ui_MainWindow()
     ui.setupUi(window)
     window.show()
