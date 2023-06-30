@@ -239,6 +239,9 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.stockName)
 
+        ### variable that holds the current theme style
+        self.DarkTheme = False
+
         self.favouritesGroup = QGroupBox(self.centralwidget)
         self.favouritesGroup.setObjectName(u"favouritesGroup")
         self.favouritesGroup.setGeometry(QRect(1090, 620, 321, 201))
@@ -615,12 +618,14 @@ class Ui_MainWindow(object):
 
     ### function to switch between dark/light themes
     def switchColourTheme(self):
-        # self.theme_switch = not self.theme_switch
         app = QCoreApplication.instance()
-        # if self.theme_switch:
-            # app.setStyleSheet(lightTheme)
-        # else:
-        app.setStyleSheet(darkTheme)
+        if self.DarkTheme:
+            app.setStyleSheet(lightTheme)
+            self.switchColourButton.setText("Dark Mode")
+        else:
+            app.setStyleSheet(darkTheme)
+            self.switchColourButton.setText("Light Mode")
+        self.DarkTheme = not self.DarkTheme
 
 ### function to create main window
 def createMainWindow() -> None:
