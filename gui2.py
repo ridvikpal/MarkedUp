@@ -239,6 +239,9 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.stockName)
 
+        ### initialize the favourites table
+        self.initalizaFavourites()
+
         self.favouritesGroup = QGroupBox(self.centralwidget)
         self.favouritesGroup.setObjectName(u"favouritesGroup")
         self.favouritesGroup.setGeometry(QRect(1090, 620, 321, 201))
@@ -252,10 +255,6 @@ class Ui_MainWindow(object):
         self.favouritesTable.setObjectName(u"favouritesTable")
         self.favouritesTable.setGeometry(QRect(10, 20, 301, 141))
         self.favouritesTable.horizontalHeader().setStretchLastSection(True)
-
-        ### get the clicked favourite
-        self.favouritesTable.cellClicked.connect(self.getClickedCell)
-
         self.layoutWidget2 = QWidget(self.favouritesGroup)
         self.layoutWidget2.setObjectName(u"layoutWidget2")
         self.layoutWidget2.setGeometry(QRect(10, 170, 301, 25))
@@ -288,9 +287,6 @@ class Ui_MainWindow(object):
 
         ### connect removeFavourite function to removeFavouritesButton
         self.removeFavouritesButton.clicked.connect(self.removeFavourite)
-
-        ### initialize the favourites table
-        self.initalizaFavourites()
 
         MainWindow.setCentralWidget(self.centralwidget)
 
