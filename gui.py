@@ -455,6 +455,7 @@ class Ui_MainWindow(object):
             self.stockImage.setPixmap(QPixmap(image))
 
             # update the stock plotly graph
+            self.plotlyGraph.page().setBackgroundColor(QColor(0, 0, 0, 1))
             self.showThreeMonthGraph()
 
         except Exception as e:
