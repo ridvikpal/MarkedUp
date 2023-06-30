@@ -605,14 +605,26 @@ class Ui_MainWindow(object):
             open('saved_favourites.json', 'w').close()
             savedFavourites = dict()
 
+    ### function to switch between dark/light themes
+    def switchColourTheme(self):
+        # self.theme_switch = not self.theme_switch
+        app = QCoreApplication.instance()
+        # if self.theme_switch:
+            # app.setStyleSheet(lightTheme)
+        # else:
+        app.setStyleSheet(darkTheme)
+
 ### function to create main window
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
     window = QMainWindow()
 
     # setup stylesheet
-    style = qdarkstyle.load_stylesheet(palette=qdarkstyle.LightPalette)
-    app.setStyleSheet(style)
+    global lightTheme
+    global darkTheme
+    lightTheme = qdarkstyle.load_stylesheet(palette=qdarkstyle.LightPalette)
+    darkTheme = qdarkstyle.load_stylesheet(palette=qdarkstyle.DarkPalette)
+    app.setStyleSheet(lightTheme)
 
     ui = Ui_MainWindow()
     ui.setupUi(window)
