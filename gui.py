@@ -295,6 +295,9 @@ class Ui_MainWindow(object):
         ### initialize the favourites table
         self.initalizaFavourites()
 
+        ### Add autocomplete to the stockSearch
+        self.setupAutcomplete()
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -656,6 +659,12 @@ class Ui_MainWindow(object):
         else:
             self.showFiveYearGraph()
 
+    def setupAutcomplete(self) -> None:
+        self.stocksList = connection.getStocksList()
+        self.stockCompleter = QCompleter(self.stocksList)
+        self.stockCompleter.setCaseSensitivity(Qt.CaseInsensitive)
+        self.stockSearch.setCompleter(self.stockCompleter)
+
 ### function to create main window
 def createMainWindow() -> None:
     app = QApplication(sys.argv)
@@ -677,13 +686,7 @@ def createMainWindow() -> None:
 
 ### function used to test things
 def testFunction():
-    df = connection.getStockTimeSeries("AAPL", "United States")
-    print(df)
-    # connection.exportFilteredTimeSeriesGraph(df, "3 months")
-    # figure = connection.createPlotlyGraph(df)
-    # figure.show()
-
-def initFavourites() -> None:
-        if os.path.isfile('saved_favourites.json'):
-            savedFavourites = json.load(open('saved_favourites.json'))
-            print(savedFavourites)
+    # df = connection.update_stocks_list()
+    matches = connection.getStocksList('United States')
+    # for x in matches: print(x)
+    print(matches)

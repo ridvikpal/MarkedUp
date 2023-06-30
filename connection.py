@@ -34,6 +34,10 @@ def update_stocks_list() -> pd.DataFrame:
         # all_stocks = td.get_stocks_list().as_json()
         # json.dump(all_stocks, indent=4, fp=f)
     df = pd.read_json("all_stocks.json")
+    df.drop('currency', axis=1, inplace=True)
+    df.drop('exchange', axis=1, inplace=True)
+    df.drop('mic_code', axis=1, inplace=True)
+    df.drop('type', axis=1, inplace=True)
     return df
 
 # this function will filter the data for a specific time
@@ -136,10 +140,25 @@ def getStockTimeSeries(symb: str, count: str) -> pd.DataFrame:
     return time_series.as_pandas()
 
 # lookup from the dataframe for a specific stock from partial name
-def getStockInformation(partialName: str, count: str) -> pd.DataFrame:
+def autocompleteStockInformation(partialName: str, count: str) -> list:
     df = pd.read_json("all_stocks.json")
-    row = df[(df['name'].str.contains(pat=partialName, case=False)) & (df['country'] == count)]
-    return row
+    df.drop('currency', axis=1, inplace=True)
+    df.drop('exchange', axis=1, inplace=True)
+    df.drop('mic_code', axis=1, inplace=True)
+    df.drop('type', axis=1, inplace=True)
+    matchesDF = df[(df['name'].str.contains(pat=partialName, case=False)) & (df['country'] == count)]
+    matchesDF.drop('country', axis=1, inplace=True)
+    returnList = matchesDF.values.tolist()
+    return returnList
+
+def getStocksList() -> list:
+    df = pd.read_json("all_stocks.json")
+    df.drop(['currency', 'exchange', 'mic_code', 'type', 'country'], axis=1, inplace=True)
+    df['autocomplete_name'] = df[['name', 'symbol']].agg(' - '.join, axis=1)
+    df.drop(['symbol', 'name'], axis=1, inplace=True)
+    returnList = df.to_numpy().flatten().tolist()
+    return returnList
+
 
 # get a trading style quote for a specific stock
 def getStockQuote(symb: str, count: str) -> pd.DataFrame:
