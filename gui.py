@@ -455,8 +455,7 @@ class Ui_MainWindow(object):
             self.stockImage.setPixmap(QPixmap(image))
 
             # update the stock plotly graph
-            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months.html"))
-            self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
+            self.showThreeMonthGraph()
 
         except Exception as e:
             errorMessage = QMessageBox()
@@ -469,7 +468,11 @@ class Ui_MainWindow(object):
 
     ### function to show the one month graph
     def showOneMonthGraph(self) -> None:
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 month.html"))
+        if self.DarkTheme:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 month_dark.html"))
+        else:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 month.html"))
+
         if os.path.isfile(file_path):
             # update the stock plotly graph
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
@@ -483,7 +486,11 @@ class Ui_MainWindow(object):
 
     ### function to show the three month graph
     def showThreeMonthGraph(self) -> None:
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months.html"))
+        if self.DarkTheme:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months_dark.html"))
+        else:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "3 months.html"))
+
         if os.path.isfile(file_path):
             # update the stock plotly graph
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
@@ -497,7 +504,10 @@ class Ui_MainWindow(object):
 
     ### function to show the six month graph
     def showSixMonthGraph(self) -> None:
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__),  "6 months.html"))
+        if self.DarkTheme:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "6 months_dark.html"))
+        else:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "6 months.html"))
         if os.path.isfile(file_path):
             # update the stock plotly graph
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
@@ -511,7 +521,10 @@ class Ui_MainWindow(object):
 
     ### function to show the one year graph
     def showOneYearGraph(self) -> None:
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 year.html"))
+        if self.DarkTheme:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 year_dark.html"))
+        else:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "1 year.html"))
         if os.path.isfile(file_path):
             # update the stock plotly graph
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
@@ -525,7 +538,10 @@ class Ui_MainWindow(object):
 
     ### function to show the five year graph
     def showFiveYearGraph(self) -> None:
-        file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "5 years.html"))
+        if self.DarkTheme:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "5 years_dark.html"))
+        else:
+            file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "5 years.html"))
         if os.path.isfile(file_path):
             # update the stock plotly graph
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
@@ -626,6 +642,18 @@ class Ui_MainWindow(object):
             app.setStyleSheet(darkTheme)
             self.switchColourButton.setText("Light Mode")
         self.DarkTheme = not self.DarkTheme
+
+        current_graph = self.plotlyGraph.page().title()
+        if "1 month" in current_graph:
+            self.showOneMonthGraph()
+        elif "3 months" in current_graph:
+            self.showThreeMonthGraph()
+        elif "6 months" in current_graph:
+            self.showSixMonthGraph()
+        elif "1 year" in current_graph:
+            self.showOneYearGraph()
+        else:
+            self.showFiveYearGraph()
 
 ### function to create main window
 def createMainWindow() -> None:

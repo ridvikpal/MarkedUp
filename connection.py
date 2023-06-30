@@ -61,7 +61,7 @@ def filterTimeSeries(timeSeries: pd.DataFrame, timeFilter: str = None) -> pd.Dat
     return timeSeries
 
 # create a plotly graph from a timeseries
-def createPlotlyGraph(timeSeries: pd.DataFrame) -> gpo.Figure:
+def createPlotlyGraph(timeSeries: pd.DataFrame) -> tuple:
     figure = sub.make_subplots(
         rows=2,
         cols=1,
@@ -104,16 +104,24 @@ def createPlotlyGraph(timeSeries: pd.DataFrame) -> gpo.Figure:
         )
     )
 
-    return figure
+    dark_figure = gpo.Figure(figure)
+
+    dark_figure.update_layout(
+        template='plotly_dark'
+    )
+
+    return figure, dark_figure
 
 # export the filtered time series graph to an html file
 def exportFilteredTimeSeriesGraph(timeSeries: pd.DataFrame, timeFilter: str = None) -> None:
     filteredTS = filterTimeSeries(timeSeries, timeFilter)
-    figure = createPlotlyGraph(filteredTS)
+    figures = createPlotlyGraph(filteredTS)
     if timeFilter:
-        plotly.offline.plot(figure, filename=(timeFilter + ".html"), auto_open=False)
+        plotly.offline.plot(figures[0], filename=(timeFilter + ".html"), auto_open=False)
+        plotly.offline.plot(figures[1], filename=(timeFilter + "_dark" + ".html"), auto_open=False)
     else:
-        plotly.offline.plot(figure, filename="5 years.html", auto_open=False)
+        plotly.offline.plot(figures[0], filename="5 years.html", auto_open=False)
+        plotly.offline.plot(figures[1], filename="5 years_dark.html", auto_open=False)
 
 # gets historical stock information and returns it as a plotly figure (ready to graph)
 def getStockTimeSeries(symb: str, count: str) -> pd.DataFrame:
