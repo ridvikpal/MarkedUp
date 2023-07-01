@@ -29,16 +29,10 @@ td = TDClient(apikey="2d748ba087024b199c77cce35b2f8d78")
     "country",
     "type"
 """
-def update_stocks_list() -> pd.DataFrame:
-    # with open("all_stocks.json", "w") as f:
-        # all_stocks = td.get_stocks_list().as_json()
-        # json.dump(all_stocks, indent=4, fp=f)
-    df = pd.read_json("all_stocks.json")
-    df.drop('currency', axis=1, inplace=True)
-    df.drop('exchange', axis=1, inplace=True)
-    df.drop('mic_code', axis=1, inplace=True)
-    df.drop('type', axis=1, inplace=True)
-    return df
+def update_stocks_list() -> None:
+    with open("all_stocks.json", "w") as f:
+        all_stocks = td.get_stocks_list().as_json()
+        json.dump(all_stocks, indent=4, fp=f)
 
 # this function will filter the data for a specific time
 def filterTimeSeries(timeSeries: pd.DataFrame, timeFilter: str = None) -> pd.DataFrame:
