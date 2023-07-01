@@ -156,6 +156,7 @@ def getStocksList() -> list:
     df.drop(['currency', 'exchange', 'mic_code', 'type', 'country'], axis=1, inplace=True)
     df['autocomplete_name'] = df[['name', 'symbol']].agg(' - '.join, axis=1)
     df.drop(['symbol', 'name'], axis=1, inplace=True)
+    df.sort_values(by=['autocomplete_name'], inplace=True)
     returnList = df.to_numpy().flatten().tolist()
     return returnList
 

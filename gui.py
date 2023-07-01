@@ -663,7 +663,10 @@ class Ui_MainWindow(object):
         self.stocksList = connection.getStocksList()
         self.stockCompleter = QCompleter(self.stocksList)
         self.stockCompleter.setCaseSensitivity(Qt.CaseInsensitive)
+        self.stockCompleter.setModelSorting(QCompleter.CaseSensitivelySortedModel)
         self.stockSearch.setCompleter(self.stockCompleter)
+        self.stockCompleter.popup().setMinimumHeight(750)
+        self.stockCompleter.popup().setMinimumWidth(350)
 
 ### function to create main window
 def createMainWindow() -> None:
