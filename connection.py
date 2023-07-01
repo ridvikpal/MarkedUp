@@ -154,6 +154,7 @@ def autocompleteStockInformation(partialName: str, count: str) -> list:
 def getStocksList() -> list:
     df = pd.read_json("all_stocks.json")
     df.drop(['currency', 'exchange', 'mic_code', 'type', 'country'], axis=1, inplace=True)
+    df.drop_duplicates(subset='symbol', inplace=True)
     df['autocomplete_name'] = df[['name', 'symbol']].agg(' - '.join, axis=1)
     df.drop(['symbol', 'name'], axis=1, inplace=True)
     df.sort_values(by=['autocomplete_name'], inplace=True)

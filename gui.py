@@ -388,7 +388,9 @@ class Ui_MainWindow(object):
     def enterStock(self) -> None:
         try:
             # get data for specific stock
-            stockSymbol = self.stockSearch.text()
+            autoCompleteString = self.stockSearch.text()
+            extractData = autoCompleteString.split(" - ")
+            stockSymbol = extractData[-1]
             # get the country of the stock
             stockCountry = self.countrySelectBox.currentText()
 
@@ -611,7 +613,8 @@ class Ui_MainWindow(object):
             if self.favouritesTable.rowCount() > 0:
                 rowToLoad = selectedFavourite.row()
                 symbol = self.favouritesTable.item(rowToLoad, 0).text()
-                self.stockSearch.setText(symbol)
+                name = self.favouritesTable.item(rowToLoad, 1).text()
+                self.stockSearch.setText(name + " - " + symbol)
                 self.enterStock()
         except Exception as e:
             errorMessage = QMessageBox()
@@ -665,8 +668,7 @@ class Ui_MainWindow(object):
         self.stockCompleter.setCaseSensitivity(Qt.CaseInsensitive)
         self.stockCompleter.setModelSorting(QCompleter.CaseSensitivelySortedModel)
         self.stockSearch.setCompleter(self.stockCompleter)
-        self.stockCompleter.popup().setMinimumHeight(750)
-        self.stockCompleter.popup().setMinimumWidth(350)
+        self.stockCompleter.setMaxVisibleItems(40)
 
 ### function to create main window
 def createMainWindow() -> None:
