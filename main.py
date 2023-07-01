@@ -23,8 +23,6 @@ def main() -> None:
         gui.os.remove(fiveYearsGraphFilePath)
 
     gui.createMainWindow()
-    # gui.testFunction()
-    # gui.initFavourites()
 
 if __name__ == "__main__":
     main()

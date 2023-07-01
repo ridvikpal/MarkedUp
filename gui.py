@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'user_interface_designhemcKK.ui'
+## Form generated from reading UI file 'user_interface_designUPMURv.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -21,7 +21,7 @@ from threading import Thread
 import json
 import qdarkstyle
 
-# create a thread class that also returns a value on join()
+### create a thread class that also returns a value on join()
 class ThreadWithReturnValue(Thread):
     def __init__(self, group=None, target=None, name=None, args=(), kwargs={}, Verbose=None):
         Thread.__init__(self, group, target, name, args, kwargs)
@@ -43,21 +43,21 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1419, 830)
+        MainWindow.setFixedSize(1419, 839)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.plotlyGroup = QGroupBox(self.centralwidget)
         self.plotlyGroup.setObjectName(u"plotlyGroup")
-        self.plotlyGroup.setGeometry(QRect(10, 10, 1071, 811))
+        self.plotlyGroup.setGeometry(QRect(10, 10, 1071, 821))
 
         # self.plotlyGraph = QWidget(self.plotlyGroup)
         # self.plotlyGraph.setObjectName(u"plotlyGraph")
-        # self.plotlyGraph.setGeometry(QRect(10, 70, 1051, 731))
+        # self.plotlyGraph.setGeometry(QRect(10, 70, 1051, 741))
 
         ### Setup plotly graph
         self.plotlyGraph = QWebEngineView(self.plotlyGroup)
         self.plotlyGraph.setObjectName(u"plotlyGraph")
-        self.plotlyGraph.setGeometry(QRect(10, 70, 1051, 731))
+        self.plotlyGraph.setGeometry(QRect(10, 70, 1051, 741))
 
         self.layoutWidget = QWidget(self.plotlyGroup)
         self.layoutWidget.setObjectName(u"layoutWidget")
@@ -72,17 +72,15 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.oneMonthFilter.setFont(font)
 
+        self.horizontalLayout_3.addWidget(self.oneMonthFilter)
         ### connect oneMonthFilter to show the right graph
         self.oneMonthFilter.clicked.connect(self.showOneMonthGraph)
-
-        self.horizontalLayout_3.addWidget(self.oneMonthFilter)
 
         self.threeMonthFilter = QPushButton(self.layoutWidget)
         self.threeMonthFilter.setObjectName(u"threeMonthFilter")
         self.threeMonthFilter.setFont(font)
 
         self.horizontalLayout_3.addWidget(self.threeMonthFilter)
-
         ### connect threeMonthFilter to show the right graph
         self.threeMonthFilter.clicked.connect(self.showThreeMonthGraph)
 
@@ -91,7 +89,6 @@ class Ui_MainWindow(object):
         self.sixMonthFilter.setFont(font)
 
         self.horizontalLayout_3.addWidget(self.sixMonthFilter)
-
         ### connect sixMonthFilter to show the right graph
         self.sixMonthFilter.clicked.connect(self.showSixMonthGraph)
 
@@ -100,7 +97,6 @@ class Ui_MainWindow(object):
         self.oneYearFilter.setFont(font)
 
         self.horizontalLayout_3.addWidget(self.oneYearFilter)
-
         ### connect oneYearFilter to show the right graph
         self.oneYearFilter.clicked.connect(self.showOneYearGraph)
 
@@ -109,7 +105,6 @@ class Ui_MainWindow(object):
         self.fiveYearFilter.setFont(font)
 
         self.horizontalLayout_3.addWidget(self.fiveYearFilter)
-
         ### connect fiveYearFilter to show the right graph
         self.fiveYearFilter.clicked.connect(self.showFiveYearGraph)
 
@@ -118,7 +113,6 @@ class Ui_MainWindow(object):
         self.switchColourButton.setFont(font)
 
         self.horizontalLayout_3.addWidget(self.switchColourButton)
-
         ### connect dark mode button to switch colour function
         self.switchColourButton.clicked.connect(self.switchColourTheme)
 
@@ -127,7 +121,7 @@ class Ui_MainWindow(object):
         self.stockSearchGroup.setGeometry(QRect(1090, 10, 321, 61))
         self.stockSearch = QLineEdit(self.stockSearchGroup)
         self.stockSearch.setObjectName(u"stockSearch")
-        self.stockSearch.setGeometry(QRect(10, 20, 171, 31))
+        self.stockSearch.setGeometry(QRect(10, 20, 301, 31))
         font1 = QFont()
         font1.setFamily(u"Arial")
         font1.setPointSize(14)
@@ -136,35 +130,9 @@ class Ui_MainWindow(object):
         ### Run function on enter for stock search line edit
         self.stockSearch.returnPressed.connect(self.enterStock)
 
-        self.countrySelectBox = QComboBox(self.stockSearchGroup)
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.addItem("")
-        self.countrySelectBox.setObjectName(u"countrySelectBox")
-        self.countrySelectBox.setGeometry(QRect(190, 20, 121, 31))
         self.stockDataGroup = QGroupBox(self.centralwidget)
         self.stockDataGroup.setObjectName(u"stockDataGroup")
-        self.stockDataGroup.setGeometry(QRect(1090, 80, 321, 531))
+        self.stockDataGroup.setGeometry(QRect(1090, 80, 321, 541))
         self.stockDataTable = QTableWidget(self.stockDataGroup)
         if (self.stockDataTable.columnCount() < 1):
             self.stockDataTable.setColumnCount(1)
@@ -203,7 +171,7 @@ class Ui_MainWindow(object):
         __qtablewidgetitem15 = QTableWidgetItem()
         self.stockDataTable.setVerticalHeaderItem(14, __qtablewidgetitem15)
         self.stockDataTable.setObjectName(u"stockDataTable")
-        self.stockDataTable.setGeometry(QRect(10, 150, 301, 371))
+        self.stockDataTable.setGeometry(QRect(10, 150, 301, 381))
         font2 = QFont()
         font2.setFamily(u"Arial")
         self.stockDataTable.setFont(font2)
@@ -244,7 +212,7 @@ class Ui_MainWindow(object):
 
         self.favouritesGroup = QGroupBox(self.centralwidget)
         self.favouritesGroup.setObjectName(u"favouritesGroup")
-        self.favouritesGroup.setGeometry(QRect(1090, 620, 321, 201))
+        self.favouritesGroup.setGeometry(QRect(1090, 630, 321, 201))
         self.favouritesTable = QTableWidget(self.favouritesGroup)
         if (self.favouritesTable.columnCount() < 2):
             self.favouritesTable.setColumnCount(2)
@@ -270,7 +238,6 @@ class Ui_MainWindow(object):
         self.addFavouritesButton.setFont(font2)
 
         self.horizontalLayout_2.addWidget(self.addFavouritesButton)
-
         ### connect addFavourite function to addFavouritesButton
         self.addFavouritesButton.clicked.connect(self.addFavourite)
 
@@ -279,7 +246,6 @@ class Ui_MainWindow(object):
         self.loadFavouriteButton.setFont(font2)
 
         self.horizontalLayout_2.addWidget(self.loadFavouriteButton)
-
         ### connect the load favourites function to the loadFavouriteButton
         self.loadFavouriteButton.clicked.connect(self.loadFavourite)
 
@@ -288,7 +254,6 @@ class Ui_MainWindow(object):
         self.removeFavouritesButton.setFont(font2)
 
         self.horizontalLayout_2.addWidget(self.removeFavouritesButton)
-
         ### connect removeFavourite function to removeFavouritesButton
         self.removeFavouritesButton.clicked.connect(self.removeFavourite)
 
@@ -315,30 +280,6 @@ class Ui_MainWindow(object):
         self.fiveYearFilter.setText(QCoreApplication.translate("MainWindow", u"5 Years", None))
         self.switchColourButton.setText(QCoreApplication.translate("MainWindow", u"Dark Mode", None))
         self.stockSearchGroup.setTitle(QCoreApplication.translate("MainWindow", u"Stock Search", None))
-        self.countrySelectBox.setItemText(0, QCoreApplication.translate("MainWindow", u"United States", None))
-        self.countrySelectBox.setItemText(1, QCoreApplication.translate("MainWindow", u"Canada", None))
-        self.countrySelectBox.setItemText(2, QCoreApplication.translate("MainWindow", u"United Kingdom", None))
-        self.countrySelectBox.setItemText(3, QCoreApplication.translate("MainWindow", u"India", None))
-        self.countrySelectBox.setItemText(4, QCoreApplication.translate("MainWindow", u"Japan", None))
-        self.countrySelectBox.setItemText(5, QCoreApplication.translate("MainWindow", u"China", None))
-        self.countrySelectBox.setItemText(6, QCoreApplication.translate("MainWindow", u"Germany", None))
-        self.countrySelectBox.setItemText(7, QCoreApplication.translate("MainWindow", u"Taiwan", None))
-        self.countrySelectBox.setItemText(8, QCoreApplication.translate("MainWindow", u"Brazil", None))
-        self.countrySelectBox.setItemText(9, QCoreApplication.translate("MainWindow", u"Australia", None))
-        self.countrySelectBox.setItemText(10, QCoreApplication.translate("MainWindow", u"Switzerland", None))
-        self.countrySelectBox.setItemText(11, QCoreApplication.translate("MainWindow", u"Finland", None))
-        self.countrySelectBox.setItemText(12, QCoreApplication.translate("MainWindow", u"Indonesia", None))
-        self.countrySelectBox.setItemText(13, QCoreApplication.translate("MainWindow", u"Argentina", None))
-        self.countrySelectBox.setItemText(14, QCoreApplication.translate("MainWindow", u"Austria", None))
-        self.countrySelectBox.setItemText(15, QCoreApplication.translate("MainWindow", u"Netherlands", None))
-        self.countrySelectBox.setItemText(16, QCoreApplication.translate("MainWindow", u"Mexico", None))
-        self.countrySelectBox.setItemText(17, QCoreApplication.translate("MainWindow", u"Sweden", None))
-        self.countrySelectBox.setItemText(18, QCoreApplication.translate("MainWindow", u"Israel", None))
-        self.countrySelectBox.setItemText(19, QCoreApplication.translate("MainWindow", u"Spain", None))
-        self.countrySelectBox.setItemText(20, QCoreApplication.translate("MainWindow", u"Turkey", None))
-        self.countrySelectBox.setItemText(21, QCoreApplication.translate("MainWindow", u"Singapore", None))
-        self.countrySelectBox.setItemText(22, QCoreApplication.translate("MainWindow", u"South Africa", None))
-
         self.stockDataGroup.setTitle(QCoreApplication.translate("MainWindow", u"Stock Data", None))
         ___qtablewidgetitem = self.stockDataTable.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Data", None));
@@ -391,13 +332,11 @@ class Ui_MainWindow(object):
             autoCompleteString = self.stockSearch.text()
             extractData = autoCompleteString.split(" - ")
             stockSymbol = extractData[-1]
-            # get the country of the stock
-            stockCountry = self.countrySelectBox.currentText()
 
-            quoteThread = ThreadWithReturnValue(target=connection.getStockQuote, args=(stockSymbol, stockCountry))
+            quoteThread = ThreadWithReturnValue(target=connection.getStockQuote, args=(stockSymbol,))
             priceThread = ThreadWithReturnValue(target=connection.getLivePrice, args=(stockSymbol,))
-            logoThread = ThreadWithReturnValue(target=connection.getStockLogo, args=(stockSymbol, stockCountry))
-            timeSeriesThread = ThreadWithReturnValue(target=connection.getStockTimeSeries, args=(stockSymbol, stockCountry))
+            logoThread = ThreadWithReturnValue(target=connection.getStockLogo, args=(stockSymbol,))
+            timeSeriesThread = ThreadWithReturnValue(target=connection.getStockTimeSeries, args=(stockSymbol,))
 
             quoteThread.start()
             priceThread.start()
@@ -408,10 +347,6 @@ class Ui_MainWindow(object):
             livePrice = priceThread.join()
             imageURL = logoThread.join()
             timeSeries = timeSeriesThread.join()
-            # quote = connection.getStockQuote(stockSymbol, stockCountry)
-            # livePrice = connection.getLivePrice(stockSymbol, stockCountry)
-            # imageURL = connection.getStockLogo(stockSymbol, stockCountry)
-            # timeSeries = connection.getStockTimeSeries(stockSymbol, stockCountry)
 
             # once the time series data is availible, now create all five graphs and store them locally
             oneMonthGraphThread = Thread(target=connection.exportFilteredTimeSeriesGraph, args=(timeSeries, "1 month"))

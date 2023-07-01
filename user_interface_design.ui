@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1419</width>
-    <height>830</height>
+    <height>839</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>1071</width>
-      <height>811</height>
+      <height>821</height>
      </rect>
     </property>
     <property name="title">
@@ -32,7 +32,7 @@
        <x>10</x>
        <y>70</y>
        <width>1051</width>
-       <height>731</height>
+       <height>741</height>
       </rect>
      </property>
     </widget>
@@ -144,7 +144,7 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>171</width>
+       <width>301</width>
        <height>31</height>
       </rect>
      </property>
@@ -155,131 +155,6 @@
       </font>
      </property>
     </widget>
-    <widget class="QComboBox" name="countrySelectBox">
-     <property name="geometry">
-      <rect>
-       <x>190</x>
-       <y>20</y>
-       <width>121</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <item>
-      <property name="text">
-       <string>United States</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Canada</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>United Kingdom</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>India</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Japan</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>China</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Germany</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Taiwan</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Brazil</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Australia</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Switzerland</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Finland</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Indonesia</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Argentina</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Austria</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Netherlands</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Mexico</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Sweden</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Israel</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Spain</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Turkey</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Singapore</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>South Africa</string>
-      </property>
-     </item>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="stockDataGroup">
     <property name="geometry">
@@ -287,7 +162,7 @@
       <x>1090</x>
       <y>80</y>
       <width>321</width>
-      <height>531</height>
+      <height>541</height>
      </rect>
     </property>
     <property name="title">
@@ -299,7 +174,7 @@
        <x>10</x>
        <y>150</y>
        <width>301</width>
-       <height>371</height>
+       <height>381</height>
       </rect>
      </property>
      <property name="font">
@@ -465,7 +340,7 @@
     <property name="geometry">
      <rect>
       <x>1090</x>
-      <y>620</y>
+      <y>630</y>
       <width>321</width>
       <height>201</height>
      </rect>

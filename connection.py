@@ -128,28 +128,13 @@ def exportFilteredTimeSeriesGraph(timeSeries: pd.DataFrame, timeFilter: str = No
         plotly.offline.plot(figures[1], filename="5 years_dark.html", auto_open=False)
 
 # gets historical stock information and returns it as a plotly figure (ready to graph)
-def getStockTimeSeries(symb: str, count: str) -> pd.DataFrame:
+def getStockTimeSeries(symb: str) -> pd.DataFrame:
     time_series = td.time_series(
         symbol=symb,
         interval="1day",
-        outputsize=2000,
-        country=count,
-        end_date=datetime.today(),
-        start_date=datetime(2000, 1, 1)
+        outputsize=2000
     )
     return time_series.as_pandas()
-
-# lookup from the dataframe for a specific stock from partial name
-def autocompleteStockInformation(partialName: str, count: str) -> list:
-    df = pd.read_json("all_stocks.json")
-    df.drop('currency', axis=1, inplace=True)
-    df.drop('exchange', axis=1, inplace=True)
-    df.drop('mic_code', axis=1, inplace=True)
-    df.drop('type', axis=1, inplace=True)
-    matchesDF = df[(df['name'].str.contains(pat=partialName, case=False)) & (df['country'] == count)]
-    matchesDF.drop('country', axis=1, inplace=True)
-    returnList = matchesDF.values.tolist()
-    return returnList
 
 def getStocksList() -> list:
     df = pd.read_json("all_stocks.json")
@@ -163,10 +148,9 @@ def getStocksList() -> list:
 
 
 # get a trading style quote for a specific stock
-def getStockQuote(symb: str, count: str) -> pd.DataFrame:
+def getStockQuote(symb: str) -> pd.DataFrame:
     stockQuote = td.quote(
         symbol=symb,
-        country=count,
         interval="5min"
     )
     return stockQuote.as_pandas()
@@ -177,7 +161,7 @@ def getLivePrice(symb: str) -> float:
     return float(price['price'])
 
 # get the company logo for a specific stock
-def getStockLogo(symb: str, count: str) -> str:
-    imageURL = td.get_logo(symbol=symb, country=count)
+def getStockLogo(symb: str) -> str:
+    imageURL = td.get_logo(symbol=symb)
     imageURL = imageURL.as_json()
     return imageURL['url']
