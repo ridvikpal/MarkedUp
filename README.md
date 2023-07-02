@@ -113,6 +113,11 @@ It is inconvenient to search for stocks all the time; it would be easier to have
 All data used in the favourites table is stored in the `saved_favourites.json` file, so that the favourites are persistant over multiple application launches.
 
 ### Multithreading
+In order to increase the performance of the application in the backend, Markup utilizes python's `threading` library to split up both the API requests and plotly graph generation. The organization of the multithreading can be explained like so:
+
+![Alt text](<MarkedUp stock update flow chart.jpg>)
+
+Another improvement in the future is to use the `QThread` library to also incorporate multithreading in the `PyQt5` GUI.
 
 ### User Interface
 
