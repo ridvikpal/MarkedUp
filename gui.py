@@ -51,6 +51,9 @@ class Ui_MainWindow(object):
         self.plotlyGroup.setObjectName(u"plotlyGroup")
         self.plotlyGroup.setGeometry(QRect(10, 10, 1071, 821))
 
+        ### create the window icon
+        self.windowIcon = QIcon("MarkedUp_Icon.png")
+
         # self.plotlyGraph = QWidget(self.plotlyGroup)
         # self.plotlyGraph.setObjectName(u"plotlyGraph")
         # self.plotlyGraph.setGeometry(QRect(10, 70, 1051, 741))
@@ -274,7 +277,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MarkedUp", None))
-        MainWindow.setWindowIcon(QIcon('MarkedUp_Icon.png'))
+        MainWindow.setWindowIcon(self.windowIcon)
         self.plotlyGroup.setTitle(QCoreApplication.translate("MainWindow", u"CandleStick Chart", None))
         self.oneMonthFilter.setText(QCoreApplication.translate("MainWindow", u"1 Month", None))
         self.threeMonthFilter.setText(QCoreApplication.translate("MainWindow", u"3 Months", None))
@@ -403,6 +406,7 @@ class Ui_MainWindow(object):
 
         except Exception as e:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Critical)
             errorMessage.setText("There was an error with the TwelveData API: ")
@@ -422,6 +426,7 @@ class Ui_MainWindow(object):
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
         else:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
             errorMessage.setText("Please select a stock first")
@@ -440,6 +445,7 @@ class Ui_MainWindow(object):
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
         else:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
             errorMessage.setText("Please select a stock first")
@@ -457,6 +463,7 @@ class Ui_MainWindow(object):
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
         else:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
             errorMessage.setText("Please select a stock first")
@@ -474,6 +481,7 @@ class Ui_MainWindow(object):
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
         else:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
             errorMessage.setText("Please select a stock first")
@@ -491,6 +499,7 @@ class Ui_MainWindow(object):
             self.plotlyGraph.load(QUrl.fromLocalFile(file_path))
         else:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
             errorMessage.setText("Please select a stock first")
@@ -514,6 +523,7 @@ class Ui_MainWindow(object):
                 json.dump(savedFavourites, f)
         else:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
             errorMessage.setText("Please select a stock first")
@@ -539,6 +549,7 @@ class Ui_MainWindow(object):
                     json.dump(savedFavourites, f)
         except Exception as e:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
             errorMessage.setText("Please select a favourite first")
@@ -556,6 +567,7 @@ class Ui_MainWindow(object):
                 self.enterStock()
         except Exception as e:
             errorMessage = QMessageBox()
+            errorMessage.setWindowIcon(self.windowIcon)
             errorMessage.setWindowTitle("An error has occured")
             errorMessage.setIcon(QMessageBox.Information)
             errorMessage.setText("Please select a favourite first")

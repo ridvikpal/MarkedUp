@@ -55,12 +55,18 @@ Upon startup for the first time, the program will create the following files:
 
 </div>
 
-The `all_stocks.json` file in particular causes the first time launch of the application to take longer than consecutive launches, because it is loading a file with around over 100,000 lines!
+The `all_stocks.json` file in particular causes the first time launch of the application to take longer than consecutive launches, because it is loading a file with around over 100,000 lines! Each time you open the application, you will see the "blank view", because you must select a stock to view before any data is loaded. You can select the stock either by searching for it in the stock search bar or by loading a stock from the favourites tab. If you attempt to load a graph before selecting a stock, you will recieve an error:
+
+![Alt text](error_occured.png)
 
 ## Features
-I designed MarkedUp to have all the possible features I would want in a stock viewer, and such that anyone could easily use it to view data.
+I designed MarkedUp to have all the possible features I would want in a stock viewer, and to be easy enough such that anyone can use it to view data.
 
 ### Data Table
+
+The main stock data is shown in the right sidebar in an organized data table. The columns and headers are colour coded for easy differentiation. A timestamp is provided to show when the data was last updated. The price data includes the current price and the
+
+![Alt text](data_table.png)
 
 ### Plotly Candlestick Chart
 
