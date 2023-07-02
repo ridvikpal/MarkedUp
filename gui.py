@@ -59,6 +59,7 @@ class Ui_MainWindow(object):
         self.plotlyGraph = QWebEngineView(self.plotlyGroup)
         self.plotlyGraph.setObjectName(u"plotlyGraph")
         self.plotlyGraph.setGeometry(QRect(10, 70, 1051, 741))
+        self.plotlyGraph.page().setBackgroundColor(QColor(0, 0, 0, 1))
 
         self.layoutWidget = QWidget(self.plotlyGroup)
         self.layoutWidget.setObjectName(u"layoutWidget")
@@ -397,7 +398,7 @@ class Ui_MainWindow(object):
             self.stockImage.setPixmap(QPixmap(image))
 
             # update the stock plotly graph
-            self.plotlyGraph.page().setBackgroundColor(QColor(0, 0, 0, 1))
+            # self.plotlyGraph.page().setBackgroundColor(QColor(0, 0, 0, 1))
             self.showThreeMonthGraph()
 
         except Exception as e:
