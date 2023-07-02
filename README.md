@@ -96,8 +96,21 @@ In order to select which stock to view, MarkedUp includes a comprehensive stock 
 
 ![Alt text](searchbar.png)
 
-### Favourites List
+### Favourites Table
 
+It is inconvenient to search for stocks all the time; it would be easier to have a saved list of stocks that you would like to view. Therefore, MarkedUp includes a saved favourites table on the bottom right. There are three buttons underneath the favourites table, that allow you to:
+
+1. Add the currently viewed stock to the table.
+2. Remove a selected stock from the table.
+3. Load a stock from the favourites table to view.
+
+<div align="center">
+
+![Alt text](favourites.png)
+
+</div>
+
+All data used in the favourites table is stored in the `saved_favourites.json` file, so that the favourites are persistant over multiple application launches.
 
 ### Multithreading
 
