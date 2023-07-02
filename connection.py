@@ -64,8 +64,8 @@ def createPlotlyGraph(timeSeries: pd.DataFrame) -> tuple:
         rows=2,
         cols=1,
         shared_xaxes=True,
-        vertical_spacing=0.03,
-        subplot_titles=('Price', 'Volume'),
+        vertical_spacing=0.01,
+        # subplot_titles=('Price', 'Volume'),
         row_heights=[0.8, 0.2]
     )
 

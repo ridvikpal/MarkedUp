@@ -210,7 +210,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.stockName)
 
         ### variable that holds the current theme style
-        self.DarkTheme = False
+        self.DarkTheme = True
 
         self.favouritesGroup = QGroupBox(self.centralwidget)
         self.favouritesGroup.setObjectName(u"favouritesGroup")
@@ -281,7 +281,7 @@ class Ui_MainWindow(object):
         self.sixMonthFilter.setText(QCoreApplication.translate("MainWindow", u"6 Months", None))
         self.oneYearFilter.setText(QCoreApplication.translate("MainWindow", u"1 Year", None))
         self.fiveYearFilter.setText(QCoreApplication.translate("MainWindow", u"5 Years", None))
-        self.switchColourButton.setText(QCoreApplication.translate("MainWindow", u"Dark Mode", None))
+        self.switchColourButton.setText(QCoreApplication.translate("MainWindow", u"Light Mode", None))
         self.stockSearchGroup.setTitle(QCoreApplication.translate("MainWindow", u"Stock Search", None))
         self.stockDataGroup.setTitle(QCoreApplication.translate("MainWindow", u"Stock Data", None))
         ___qtablewidgetitem = self.stockDataTable.horizontalHeaderItem(0)
@@ -620,7 +620,7 @@ def createMainWindow() -> None:
     global darkTheme
     lightTheme = qdarkstyle.load_stylesheet(palette=qdarkstyle.LightPalette)
     darkTheme = qdarkstyle.load_stylesheet(palette=qdarkstyle.DarkPalette)
-    app.setStyleSheet(lightTheme)
+    app.setStyleSheet(darkTheme)
 
     ui = Ui_MainWindow()
     ui.setupUi(window)
