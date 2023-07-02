@@ -66,7 +66,11 @@ I designed MarkedUp to have all the possible features I would want in a stock vi
 
 The main stock data is shown in the right sidebar in an organized data table. The columns and headers are colour coded for easy differentiation. A timestamp is provided to show when the data was last updated. The price data includes the current price and the price statistics for the last market closure.
 
+<div align="center">
+
 ![Alt text](data_table.png)
+
+</div>
 
 ### Candlestick Chart
 
@@ -86,9 +90,11 @@ An essential part of any stock viewer is the candlestick chart, which allows the
 
 Plotly graph are built on json, exported to html, and are viewed in a web browser. Therefore, MarkedUp actually uses `QtWebEngine` to view these graphs, unlike a dedicated graph window provided by most graphing libraries, such as `matplotlib`.
 
-### Stock Search Autocomplete
+### Stock Searchbar
 
-In order to select which stock to view, MarkedUp includes a comprehensive stock search
+In order to select which stock to view, MarkedUp includes a comprehensive stock searchbar on the top right. The searchbar allows searching through over 20,000 stocks, the metadata that is stored in the `all_stocks.json` file. It also includes autocomplete features which automatically filter through all stocks via the stock name. Results are displayed in a *"stock name - stock symbol"* format. This makes it very easy to select stocks to view:
+
+![Alt text](searchbar.png)
 
 ### Favourites List
 
@@ -104,3 +110,4 @@ In order to select which stock to view, MarkedUp includes a comprehensive stock 
 ## Limitations
 
 ## Features to Implement in the Future
+* Make stock searchbar support just *"stock symbol"* inputs rather than *"stock name + stock symbol"* inputs. This was done to implement autocomplete more easily, but with a bit more work the searchbar can be more adaptable to the former mode of input as well.
