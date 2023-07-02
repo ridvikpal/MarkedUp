@@ -11,6 +11,7 @@
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 import os
 import sys
@@ -272,6 +273,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MarkedUp", None))
+        MainWindow.setWindowIcon(QIcon('MarkedUp_Icon.png'))
         self.plotlyGroup.setTitle(QCoreApplication.translate("MainWindow", u"CandleStick Chart", None))
         self.oneMonthFilter.setText(QCoreApplication.translate("MainWindow", u"1 Month", None))
         self.threeMonthFilter.setText(QCoreApplication.translate("MainWindow", u"3 Months", None))
@@ -594,8 +596,10 @@ class Ui_MainWindow(object):
             self.showSixMonthGraph()
         elif "1 year" in current_graph:
             self.showOneYearGraph()
-        else:
+        elif "5 year" in current_graph:
             self.showFiveYearGraph()
+        else:
+            pass
 
     def setupAutcomplete(self) -> None:
         self.stocksList = connection.getStocksList()
