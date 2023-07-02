@@ -142,7 +142,7 @@ If you attempt to break these restrictions, MarkedUp will alert you:
 
 ![Alt text](api_error.png)
 
-You can find more information about the TwelveData API [here](https://twelvedata.com/pricing).
+You can find more information about the TwelveData API pricing [here](https://twelvedata.com/pricing).
 
 ## Features to Implement in the Future
 * Make stock searchbar support just *"stock symbol"* inputs rather than *"stock name + stock symbol"* inputs. This was done to implement autocomplete more easily, but with a bit more work the searchbar can be more adaptable to the former mode of input as well.
