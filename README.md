@@ -1,8 +1,12 @@
 # MarkedUp
 ![Alt text](MarkedUp_Logo.png)
 
+The logo contains an icon from [www.flaticon.com](https://www.flaticon.com/):
+
+<a href="https://www.flaticon.com/free-icons/candlestick" title="candlestick icons">Candlestick icons created by andinur - Flaticon</a>
+
 ## Introduction
-A desktop stock viewer that utilizes the excellent TwelveData API as the data source. It provides all relavent information for over 20,000 stocks with a clean, easy to use user interface:
+A desktop stock viewer that utilizes the excellent TwelveData API as the data source and the `PyQt5` library with the Qt framework for the GUI. It provides all relevant information for over 20,000 stocks with a clean, easy to use user interface:
 
 ![Alt text](dark_mode.png)
 
@@ -31,7 +35,7 @@ The following python libraries are used in this project:
 </div>
 
 ## Code Files
-The program source code has been broken down into 3 files. Admittedly, I should probably split the `gui.py` file into seperate files because it is too large (600+ lines):
+The program source code has been broken down into 3 files. Admittedly, I should probably split the `gui.py` file into separate files because it is too large (600+ lines):
 
 <div align="center">
 
@@ -55,7 +59,7 @@ Upon startup for the first time, the program will create the following files:
 
 </div>
 
-The `all_stocks.json` file in particular causes the first time launch of the application to take longer than consecutive launches, because it is loading a file with around over 100,000 lines! Each time you open the application, you will see the "blank view", because you must select a stock to view before any data is loaded. You can select the stock either by searching for it in the stock search bar or by loading a stock from the favourites tab. If you attempt to load a graph before selecting a stock, you will recieve an error:
+The `all_stocks.json` file in particular causes the first time launch of the application to take longer than consecutive launches, because it is loading a file with around over 100,000 lines! Each time you open the application, you will see the "blank view", because you must select a stock to view before any data is loaded. You can select the stock either by searching for it in the stock search bar or by loading a stock from the favourites tab. If you attempt to load a graph before selecting a stock, you will receive an error:
 
 ![Alt text](error_occured.png)
 
@@ -81,8 +85,8 @@ An essential part of any stock viewer is the candlestick chart, which allows the
 * Panning
 * Box select
 * Lasso select
-* Chart aoom
-* Autoscale
+* Chart zoom
+* Autoscale Axes
 * Reset axes
 * Trading Volume underneath candlestick chart
 
@@ -94,7 +98,11 @@ Plotly graph are built on json, exported to html, and are viewed in a web browse
 
 In order to select which stock to view, MarkedUp includes a comprehensive stock searchbar on the top right. The searchbar allows searching through over 20,000 stocks, the metadata that is stored in the `all_stocks.json` file. It also includes autocomplete features which automatically filter through all stocks via the stock name. Results are displayed in a *"stock name - stock symbol"* format. This makes it very easy to select stocks to view:
 
+<div align="center">
+
 ![Alt text](searchbar.png)
+
+</div>
 
 ### Favourites Table
 
@@ -110,7 +118,7 @@ It is inconvenient to search for stocks all the time; it would be easier to have
 
 </div>
 
-All data used in the favourites table is stored in the `saved_favourites.json` file, so that the favourites are persistant over multiple application launches.
+All data used in the favourites table is stored in the `saved_favourites.json` file, so that the favourites are persistent over multiple application launches.
 
 ### Multithreading
 In order to increase the performance of the application in the backend, Markup utilizes python's `threading` library to split up both the API requests and plotly graph generation. The organization of the multithreading can be explained like so:
@@ -119,13 +127,24 @@ In order to increase the performance of the application in the backend, Markup u
 
 Another improvement in the future is to use the `QThread` library to also incorporate multithreading in the `PyQt5` GUI.
 
-### User Interface
-
 ### Light Mode
+Of course, with modern UI applications having both light mode and dark mode, MarkedUp also had to have that. By default, it uses dark mode, but you can also click the light mode button to theme the entire UI in light mode if you like:
 
 ![Alt text](light_mode.png)
 
-## Limitations
+## API Limitations
+The main limitation with MarkedUp comes from the application using the free plan of the TwelveData API. On the free plan, the following restrictions exist:
+1. You ware limited to 8 API credits per minute. This means you can only view data for 2 stocks a minute.
+2. You are limited to 800 API credits per day. This means you are limited to viewing 200 stocks per day.
+3. Many stocks are not available (despite showing up in MarkedUp's autocomplete feature), but the ones on the main stock exchanges like NASDAQ, NYSE, LSE AND TSE are all available.
+
+If you attempt to break these restrictions, MarkedUp will alert you:
+
+![Alt text](api_error.png)
+
+You can find more information about the TwelveData API [here](https://twelvedata.com/pricing).
 
 ## Features to Implement in the Future
 * Make stock searchbar support just *"stock symbol"* inputs rather than *"stock name + stock symbol"* inputs. This was done to implement autocomplete more easily, but with a bit more work the searchbar can be more adaptable to the former mode of input as well.
+* Utilize `QThread` library for multithreading on the GUI side.
+* Possibly also add ETF and Index Searching (that will be a big update)!
