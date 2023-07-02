@@ -64,15 +64,34 @@ I designed MarkedUp to have all the possible features I would want in a stock vi
 
 ### Data Table
 
-The main stock data is shown in the right sidebar in an organized data table. The columns and headers are colour coded for easy differentiation. A timestamp is provided to show when the data was last updated. The price data includes the current price and the
+The main stock data is shown in the right sidebar in an organized data table. The columns and headers are colour coded for easy differentiation. A timestamp is provided to show when the data was last updated. The price data includes the current price and the price statistics for the last market closure.
 
 ![Alt text](data_table.png)
 
-### Plotly Candlestick Chart
+### Candlestick Chart
+
+An essential part of any stock viewer is the candlestick chart, which allows the user to see trends of a stock's movement via the open and close price. MarkedUp includes industry standard candlestick charting features to the left of the application. When you first view a stock, you the default candlestick chart that appears is the three month chart. Above the graph, there are 5 buttons to select the correct scaling and view for the user, ranging from 1 month to 5 years. The candlestick charts are built on the plotly library and have the following features:
+
+* Candlestick annotations
+* Selection zoom
+* Panning
+* Box select
+* Lasso select
+* Chart aoom
+* Autoscale
+* Reset axes
+* Trading Volume underneath candlestick chart
+
+![Alt text](graph.png)
+
+Plotly graph are built on json, exported to html, and are viewed in a web browser. Therefore, MarkedUp actually uses `QtWebEngine` to view these graphs, unlike a dedicated graph window provided by most graphing libraries, such as `matplotlib`.
+
+### Stock Search Autocomplete
+
+In order to select which stock to view, MarkedUp includes a comprehensive stock search
 
 ### Favourites List
 
-### Stock Search Autocomplete
 
 ### Multithreading
 
@@ -81,5 +100,7 @@ The main stock data is shown in the right sidebar in an organized data table. Th
 ### Light Mode
 
 ![Alt text](light_mode.png)
+
+## Limitations
 
 ## Features to Implement in the Future
