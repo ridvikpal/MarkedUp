@@ -6,7 +6,7 @@ The logo contains an icon from [www.flaticon.com](https://www.flaticon.com/):
 <a href="https://www.flaticon.com/free-icons/candlestick" title="candlestick icons">Candlestick icons created by andinur - Flaticon</a>
 
 ## Introduction
-A desktop stock viewer that utilizes the excellent TwelveData API as the data source and the `PyQt5` library with the Qt framework for the GUI. It provides all relevant information for over 20,000 stocks with a clean, easy to use user interface:
+A desktop stock viewer that utilizes the excellent REST TwelveData API as the data source and the `PyQt5` library with the Qt framework for the GUI. It provides all relevant information for over 20,000 stocks with a clean, easy to use user interface:
 
 ![Alt text](dark_mode.png)
 
@@ -133,7 +133,7 @@ Of course, with modern UI applications having both light mode and dark mode, Mar
 ![Alt text](light_mode.png)
 
 ## API Limitations
-The main limitation with MarkedUp comes from the application using the free plan of the TwelveData API. On the free plan, the following restrictions exist:
+The main limitation with MarkedUp comes from the application using the free plan of the REST TwelveData API. On the free plan, the following restrictions exist:
 1. You ware limited to 8 API credits per minute. This means you can only view data for 2 stocks a minute.
 2. You are limited to 800 API credits per day. This means you are limited to viewing 200 stocks per day.
 3. Many stocks are not available (despite showing up in MarkedUp's autocomplete feature), but the ones on the main stock exchanges like NASDAQ, NYSE, LSE AND TSE are all available.
