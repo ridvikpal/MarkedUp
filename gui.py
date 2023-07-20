@@ -1,13 +1,4 @@
-# -*- coding: utf-8 -*-
-
-################################################################################
-## Form generated from reading UI file 'user_interface_designUPMURv.ui'
-##
-## Created by: Qt User Interface Compiler version 5.15.2
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
-
+### IMPORTS
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *

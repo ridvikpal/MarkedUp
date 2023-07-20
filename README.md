@@ -1,5 +1,5 @@
 # MarkedUp
-![Alt text](MarkedUp_Logo.png)
+![MarkedUp_Logo.png](pictures/MarkedUp_Logo.png)
 
 The logo contains an icon from [www.flaticon.com](https://www.flaticon.com/):
 
@@ -8,7 +8,7 @@ The logo contains an icon from [www.flaticon.com](https://www.flaticon.com/):
 ## Introduction
 A desktop stock viewer that utilizes the excellent REST TwelveData API as the data source and the `PyQt5` library with the Qt framework for the GUI. It provides all relevant information for over 20,000 stocks with a clean, easy to use user interface:
 
-![Alt text](dark_mode.png)
+![dark_mode.png](pictures/dark_mode.png)
 
 ## Goals
 The goal was to create a great looking stock viewer that utilized a reputable API as it's source. It was a great way for me to improve my skills with common Python tools such as `pandas`, `plotly`, and `PyQt5`.
@@ -61,7 +61,7 @@ Upon startup for the first time, the program will create the following files:
 
 The `all_stocks.json` file in particular causes the first time launch of the application to take longer than consecutive launches, because it is loading a file with around over 100,000 lines! Each time you open the application, you will see the "blank view", because you must select a stock to view before any data is loaded. You can select the stock either by searching for it in the stock search bar or by loading a stock from the favourites tab. If you attempt to load a graph before selecting a stock, you will receive an error:
 
-![Alt text](error_occured.png)
+![error_occured.png](pictures/error_occured.png)
 
 ## Features
 I designed MarkedUp to have all the possible features I would want in a stock viewer, and to be easy enough such that anyone can use it to view data.
@@ -72,7 +72,7 @@ The main stock data is shown in the right sidebar in an organized data table. Th
 
 <div align="center">
 
-![Alt text](data_table.png)
+![data_table.png](pictures/data_table.png)
 
 </div>
 
@@ -90,7 +90,7 @@ An essential part of any stock viewer is the candlestick chart, which allows the
 * Reset axes
 * Trading Volume underneath candlestick chart
 
-![Alt text](graph.png)
+![graph.png](pictures/graph.png)
 
 Plotly graph are built on json, exported to html, and are viewed in a web browser. Therefore, MarkedUp actually uses `QtWebEngine` to view these graphs, unlike a dedicated graph window provided by most graphing libraries, such as `matplotlib`.
 
@@ -100,7 +100,7 @@ In order to select which stock to view, MarkedUp includes a comprehensive stock 
 
 <div align="center">
 
-![Alt text](searchbar.png)
+![searchbar.png](pictures/searchbar.png)
 
 </div>
 
@@ -114,7 +114,7 @@ It is inconvenient to search for stocks all the time; it would be easier to have
 
 <div align="center">
 
-![Alt text](favourites.png)
+![favourites.png](pictures/favourites.png)
 
 </div>
 
@@ -123,14 +123,14 @@ All data used in the favourites table is stored in the `saved_favourites.json` f
 ### Multithreading
 In order to increase the performance of the application in the backend, Markup utilizes python's `threading` library to split up both the API requests and plotly graph generation. The organization of the multithreading can be explained like so:
 
-![Alt text](<MarkedUp stock update flow chart.jpg>)
+![stock_update_flow_chart.jpg](pictures/stock_update_flow_chart.jpg)
 
 Another improvement in the future is to use the `QThread` library to also incorporate multithreading in the `PyQt5` GUI.
 
 ### Light Mode
 Of course, with modern UI applications having both light mode and dark mode, MarkedUp also had to have that. By default, it uses dark mode, but you can also click the light mode button to theme the entire UI in light mode if you like:
 
-![Alt text](light_mode.png)
+![light_mode.png](pictures/light_mode.png)
 
 ## API Limitations
 The main limitation with MarkedUp comes from the application using the free plan of the REST TwelveData API. On the free plan, the following restrictions exist:
@@ -140,7 +140,7 @@ The main limitation with MarkedUp comes from the application using the free plan
 
 If you attempt to break these restrictions, MarkedUp will alert you:
 
-![Alt text](api_error.png)
+![api_error.png](pictures/api_error.png)
 
 You can find more information about the TwelveData API pricing [here](https://twelvedata.com/pricing).
 
