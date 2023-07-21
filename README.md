@@ -5,6 +5,24 @@ The logo contains an icon from [www.flaticon.com](https://www.flaticon.com/):
 
 <a href="https://www.flaticon.com/free-icons/candlestick" title="candlestick icons">Candlestick icons created by andinur - Flaticon</a>
 
+<!-- TOC -->
+* [MarkedUp](#markedup)
+  * [Introduction](#introduction)
+  * [Goals](#goals)
+  * [External Libraries](#external-libraries)
+  * [Code Files](#code-files)
+  * [Initial Setup](#initial-setup)
+  * [Features](#features)
+    * [Data Table](#data-table)
+    * [Candlestick Chart](#candlestick-chart)
+    * [Stock Searchbar](#stock-searchbar)
+    * [Favourites Table](#favourites-table)
+    * [Multithreading](#multithreading)
+    * [Light Mode](#light-mode)
+  * [API Limitations](#api-limitations)
+  * [Features to Implement in the Future](#features-to-implement-in-the-future)
+<!-- TOC -->
+
 ## Introduction
 A desktop stock viewer that utilizes the excellent REST TwelveData API as the data source and the `PyQt5` library with the Qt framework for the GUI. It provides all relevant information for over 20,000 stocks with a clean, easy to use user interface:
 
@@ -19,7 +37,7 @@ The following python libraries are used in this project:
 <div align="center">
 
 | Library        | Used For                                                            |
-| -------------- | ------------------------------------------------------------------- |
+|----------------|---------------------------------------------------------------------|
 | `pandas`       | Managing stock data retrieved from the TwelveData API               |
 | `PyQt5`        | Creating the entire user interface.                                 |
 | `plotly`       | Graphing the interactive candlestick chart.                         |
@@ -40,7 +58,7 @@ The program source code has been broken down into 3 files. Admittedly, I should 
 <div align="center">
 
 | File            | Contains Code For                                             |
-| --------------- | ------------------------------------------------------------- |
+|-----------------|---------------------------------------------------------------|
 | `gui.py`        | Creating the user interface.                                  |
 | `connection.py` | Connecting and analyzing the data from the TwelveData API     |
 | `main.py`       | Cleaning up temporary files and then starting the application |
@@ -53,7 +71,7 @@ Upon startup for the first time, the program will create the following files:
 <div align="center">
 
 | File                    | Contains                                                                                                  |
-| ----------------------- | --------------------------------------------------------------------------------------------------------- |
+|-------------------------|-----------------------------------------------------------------------------------------------------------|
 | `all_stocks.json`       | Stock Identification Information for all stocks from TwelveData API. Used for autocomplete functionality. |
 | `saved_favourites.json` | Favourite Stocks Information. Originally starts off empty.                                                |
 
